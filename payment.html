@@ -6,12 +6,50 @@
   <title>Payment - TrustTune</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    body { background-color: #000; color: #fff; font-family: 'Poppins', sans-serif; padding: 30px; }
-    .summary-box { max-width: 600px; margin: auto; background: #111; padding: 25px; border-radius: 10px; }
-    h2 { color: #ff2c57; text-align: center; margin-bottom: 20px; }
-    .summary-box p { margin-bottom: 15px; font-size: 16px; }
-    .highlight { color: #ff2c57; font-weight: bold; }
-    a.whatsapp-btn {
+    body { 
+      background-color: #121212; 
+      color: #fff; 
+      font-family: 'Poppins', sans-serif; 
+      padding: 30px; 
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .payment-container {
+      background: rgba(26, 26, 26, 0.9);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 700px;
+    }
+
+    h2 {
+      color: #ff8c00;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .summary-box {
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 10px;
+    }
+
+    .summary-box p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .highlight {
+      color: #ff8c00;
+      font-weight: bold;
+    }
+
+    .whatsapp-btn {
       display: inline-block;
       margin-top: 20px;
       background-color: #25D366;
@@ -22,6 +60,7 @@
       font-weight: bold;
       text-align: center;
     }
+
     .upi-copy {
       background: #222;
       padding: 10px;
@@ -31,18 +70,31 @@
       align-items: center;
       color: #fff;
     }
+
     .upi-copy button {
-      background: #ff2c57;
+      background: #ff8c00;
       color: #fff;
       border: none;
       padding: 6px 10px;
       border-radius: 5px;
       cursor: pointer;
     }
+
     .qr-code {
-      margin-top: 20px;
+      margin-top: 30px;
       text-align: center;
+      background: rgba(26, 26, 26, 0.8);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
+
+    .qr-code img {
+      margin-top: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
   </style>
   <script>
     function showSummary() {
@@ -73,7 +125,7 @@
           📩 Send Screenshot on WhatsApp
         </a>
         
-        <!-- QR Code Section -->
+        <!-- QR Code Section - Firebase Style -->
         <div class="qr-code">
           <h3>Scan the QR Code to Pay:</h3>
           <img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiLink)}&size=250x250" alt="QR Code"/>
@@ -92,9 +144,11 @@
   </script>
 </head>
 <body>
-  <div class="summary-box">
+  <div class="payment-container">
     <h2>Complete Your Payment</h2>
-    <div id="summary"></div>
+    <div class="summary-box">
+      <div id="summary"></div>
+    </div>
   </div>
 </body>
 </html>
