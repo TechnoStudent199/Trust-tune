@@ -10,15 +10,17 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #F4F5F7; /* Light background like Firebase Studio */
-      color: #333;
+      background: linear-gradient(to right, #121212, #2e2e2e); /* Firebase dark gradient */
+      color: #fff;
       line-height: 1.6;
+      font-size: 16px;
     }
+
     /* Navbar Styling */
     .navbar {
-      background-color: #121212; /* Firebase dark navbar */
+      background-color: #1c1c1c; /* Firebase dark navbar */
       padding: 20px 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow */
     }
     .container {
       width: 90%;
@@ -26,7 +28,7 @@
       margin: 0 auto;
     }
     .logo {
-      color: #FF8C00; /* Firebase accent color */
+      color: #ff8c00; /* Firebase accent color */
       font-size: 28px;
       font-weight: 600;
     }
@@ -43,68 +45,81 @@
       transition: color 0.3s, transform 0.2s;
     }
     nav a:hover {
-      color: #FF8C00; /* Hover accent similar to Firebase */
+      color: #ff8c00; /* Hover accent */
       transform: scale(1.1); /* Slight zoom effect */
     }
+
     /* Hero Section */
     .hero {
-      background: #121212 url('https://godspeedottstore.netlify.app/static/media/banner.6eead5ac33944dbb839d.jpg') no-repeat center/cover;
+      background: url('https://godspeedottstore.netlify.app/static/media/banner.6eead5ac33944dbb839d.jpg') no-repeat center/cover;
+      background-size: cover;
       padding: 120px 0;
       text-align: center;
+      color: #fff;
     }
     .hero h2 {
-      font-size: 42px;
+      font-size: 48px;
       margin-bottom: 20px;
+      font-weight: 600;
       color: #fff;
     }
     .hero p {
       font-size: 20px;
-      margin-bottom: 20px;
-      color: #ccc;
+      margin-bottom: 30px;
+      color: #ddd;
     }
     .btn {
-      background-color: #FF8C00; /* Firebase accent color */
+      background-color: #ff8c00; /* Firebase accent color */
       color: #fff;
-      padding: 14px 32px;
-      border-radius: 5px;
+      padding: 16px 36px;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, transform 0.3s;
     }
     .btn:hover {
-      background-color: #FF6A00; /* Slight darkening on hover */
+      background-color: #e77c00; /* Darker orange for hover effect */
+      transform: scale(1.05);
     }
+
     /* Features Section */
     .features {
       padding: 60px 0;
-      background-color: #fff;
+      background-color: #1c1c1c;
+      text-align: center;
     }
     .features h3 {
-      text-align: center;
       font-size: 32px;
       margin-bottom: 40px;
-      color: #FF8C00; /* Firebase blue accent */
+      color: #ff8c00; /* Accent color */
     }
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 30px;
+      justify-items: center;
     }
     .feature-box {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Card effect with shadow */
+      background-color: #333;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Floating card effect */
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Hover floating effect */
     }
     .feature-box h4 {
-      color: #FF8C00;
-      margin-bottom: 10px;
+      color: #ff8c00;
+      margin-bottom: 15px;
+      font-size: 20px;
     }
     .feature-box p {
-      color: #666;
+      color: #ddd;
       font-size: 14px;
     }
+
     /* Footer Section */
     .footer {
       background-color: #121212;
@@ -113,6 +128,18 @@
       font-size: 14px;
       color: #777;
     }
+
+    /* AI Powered label */
+    .ai-powered {
+      background-color: #ff8c00;
+      padding: 5px 15px;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
   </style>
 </head>
 <body>
@@ -120,7 +147,7 @@
     <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
       <h1 class="logo">TrustTune</h1>
       <nav>
-        <ul class="nav-links">
+        <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -163,4 +190,4 @@
     </div>
   </footer>
 </body>
-</html>
+  </html>
