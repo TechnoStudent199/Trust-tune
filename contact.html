@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - TrustTune</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #2a2a2a, #111); /* Firebase-style gradient */
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 30px;
+    }
+
+    /* Form Box */
+    .form-box {
+      background: #1c1c1c;
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 450px;
+      width: 100%;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #ff8c00; /* Firebase accent color */
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      background-color: #444;
+      outline: none;
+      box-shadow: 0 0 10px rgba(255, 140, 0, 0.8); /* Focus effect */
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #ff8c00;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: #e77c00; /* Button hover effect */
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #111;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      color: #777;
+    }
+
+  </style>
+  <script>
+    // Extracting the query parameters and filling the form
+    function getQueryParams() {
+      const url = new URL(window.location.href);
+      const plan = url.searchParams.get('plan') || '';
+      const price = url.searchParams.get('price') || '';
+      document.getElementById('plan').value = plan;
+      document.getElementById('price').value = price;
+    }
+
+    // Proceed to payment with form validation
+    function goToPayment(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const plan = document.getElementById('plan').value;
+      const price = document.getElementById('price').value;
+      if (!name || !plan || !price) {
+        alert('Please fill all details.');
+        return;
+      }
+      const params = new URLSearchParams({ name, plan, price });
+      window.location.href = 'payment.html?' + params.toString();
+    }
+
+    // Initialize form with query params
+    window.onload = getQueryParams;
+  </script>
+</head>
+<body>
+
+  <div class="form-box">
+    <h2>Confirm Your Details</h2>
+    <form onsubmit="goToPayment(event)">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
+
+      <label for="plan">Selected Plan:</label>
+      <input type="text" id="plan" readonly />
+
+      <label for="price">Price (₹):</label>
+      <input type="text" id="price" readonly />
+
+      <button type="submit">Continue to Payment</button>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 TrustTune Premium Subscriptions. All rights reserved.</p>
+  </footer>
+
+</body>
+</html
