@@ -66,8 +66,9 @@
       justify-content: space-between;
       transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
     }
+
     .card:hover {
-      transform: scale(1.05); /* Zoom-in effect on hover */
+      transform: scale(1.1); /* Noticeable zoom effect on hover */
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Hover effect */
     }
 
@@ -150,10 +151,7 @@
         <div class="card"><h3>Canva Pro: 1M</h3><p>₹45 <br/>Original: ₹499</p><a href="contact.html?plan=Canva%201M&price=45">Buy Now</a></div>
         <div class="card"><h3>Canva Pro: 3M</h3><p>₹75 <br/>Original: ₹1500</p><a href="contact.html?plan=Canva%203M&price=75">Buy Now</a></div>
         <div class="card"><h3>Canva Pro: 6M</h3><p>₹135 <br/>Original: ₹3000</p><a href="contact.html?plan=Canva%206M&price=135">Buy Now</a></div>
-        <div class="card"><h3>Canva Pro: 1Y</h3><p>₹145 <br/>Original: ₹4000</p><a href="contact.html?plan=Canva%201Y&price=145">Buy Now</a></div>
-        <div class="card"><h3>Canva Pro: 2Y</h3><p>₹195 <br/>Original: ₹6000</p><a href="contact.html?plan=Canva%202Y&price=195">Buy Now</a></div>
         <div class="card"><h3>Adobe CC: 1M</h3><p>₹699 <br/>Original: ₹4230</p><a href="contact.html?plan=Adobe%201M&price=699">Buy Now</a></div>
-        <div class="card"><h3>Adobe CC: 1Y</h3><p>₹3699 <br/>Original: ₹22163</p><a href="contact.html?plan=Adobe%201Y&price=3699">Buy Now</a></div>
       </div>
     </div>
 
@@ -179,7 +177,7 @@
         const windowHeight = window.innerHeight;
         
         if (cardPosition < windowHeight * 0.8) {
-          card.style.transform = "scale(1.05)";
+          card.style.transform = "scale(1.1)";
         } else {
           card.style.transform = "scale(1)";
         }
@@ -187,4 +185,4 @@
     });
   </script>
 </body>
-                                                        </html>
+  </html>
