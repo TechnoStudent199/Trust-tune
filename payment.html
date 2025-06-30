@@ -6,12 +6,12 @@
   <title>Payment - TrustTune</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    /* Firebase-style background */
-    body {
-      background: linear-gradient(45deg, #121212, #ff8c00); /* Dark to orange gradient */
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      padding: 30px;
+    /* Brightened background color */
+    body { 
+      background: linear-gradient(45deg, #1d1d1d, #ff8c00); /* Brighter dark-to-orange gradient */
+      color: #fff; 
+      font-family: 'Poppins', sans-serif; 
+      padding: 30px; 
       margin: 0;
       display: flex;
       justify-content: center;
@@ -19,8 +19,9 @@
       height: 100vh;
     }
 
+    /* Main payment container with transparency */
     .payment-container {
-      background-color: rgba(26, 26, 26, 0.9); /* Slightly transparent dark background */
+      background-color: rgba(26, 26, 26, 0.5); /* 50% transparent background */
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
@@ -35,7 +36,7 @@
     }
 
     .summary-box {
-      background-color: #1a1a1a;
+      background-color: rgba(26, 26, 26, 0.5); /* 50% transparent background */
       padding: 25px;
       border-radius: 10px;
     }
@@ -81,18 +82,19 @@
       cursor: pointer;
     }
 
+    /* QR Code Section - Transparent and Adjusted */
     .qr-code {
       margin-top: 30px;
       text-align: center;
-      background: rgba(26, 26, 26, 0.8); /* Dark transparent background for QR code */
-      padding: 20px;
+      background: rgba(26, 26, 26, 0.5); /* 50% transparent background */
+      padding: 25px;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
 
     .qr-code img {
-      width: 250px;
-      height: 250px;
+      width: 200px;  /* Adjusted QR size to fit within the card */
+      height: 200px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
