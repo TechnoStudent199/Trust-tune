@@ -6,77 +6,116 @@
   <title>TrustTune - Premium Plans</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
+    /* Global styles */
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #0c0c0c;
+      background: linear-gradient(to right, #121212, #ff8c00); /* Dark gradient */
       color: #fff;
     }
+
+    /* Navbar Styling */
     header {
-      background-color: #111;
+      background-color: #121212; /* Firebase dark navbar */
       padding: 20px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Heavy shadow */
     }
     header h1 {
       margin: 0;
-      color: #00e5ff;
+      color: #ff8c00; /* Accent color */
     }
+
+    /* Container */
     .container {
       width: 90%;
       max-width: 1200px;
       margin: 40px auto;
     }
+
+    /* Section Styling */
     .section {
       margin-bottom: 60px;
     }
+
     .section h2 {
-      color: #00e5ff;
+      color: #ff8c00; /* Accent color */
       border-bottom: 2px solid #444;
       padding-bottom: 5px;
       margin-bottom: 20px;
+      font-size: 32px;
     }
+
+    /* Cards Grid */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
+
+    /* Card Styling */
     .card {
-      background-color: #1a1a1a;
+      background-color: #1a1a1a; /* Dark card background */
       border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Floating effect */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Hover effect */
+    }
+
     .card h3 {
       margin-top: 0;
       font-size: 18px;
-      color: #00e5ff;
+      color: #ff8c00; /* Accent color */
     }
+
     .card p {
       font-size: 14px;
       margin: 10px 0;
       color: #ccc;
     }
+
     .card a {
       align-self: start;
       text-decoration: none;
-      background-color: #00e5ff;
+      background-color: #ff8c00; /* Accent color */
       color: #000;
-      padding: 8px 16px;
+      padding: 10px 20px;
       border-radius: 5px;
       font-weight: 600;
       margin-top: auto;
+      transition: background-color 0.3s, transform 0.3s;
     }
+
+    .card a:hover {
+      background-color: #e77c00; /* Hover effect */
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #121212;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      color: #777;
+    }
+
   </style>
 </head>
 <body>
   <header>
     <h1>TrustTune Premium Plans</h1>
   </header>
+
   <div class="container">
+    <!-- Video & Entertainment Subscriptions -->
     <div class="section">
       <h2>Video & Entertainment Subscriptions</h2>
       <div class="cards">
@@ -102,6 +141,7 @@
       </div>
     </div>
 
+    <!-- Creative & Productivity Subscriptions -->
     <div class="section">
       <h2>Creative & Productivity Subscriptions</h2>
       <div class="cards">
@@ -115,6 +155,7 @@
       </div>
     </div>
 
+    <!-- Music & Audio Subscriptions -->
     <div class="section">
       <h2>Music & Audio Subscriptions</h2>
       <div class="cards">
@@ -126,4 +167,4 @@
     </div>
   </div>
 </body>
-      </html>
+                                                                                                                                                                   </html>
