@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TrustTune - Payment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* Global styles */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #121212, #ff8c00); /* Dark gradient */
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Navbar Styling */
+    header {
+      background-color: #121212; /* Firebase dark navbar */
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Heavy shadow */
+    }
+    header h1 {
+      margin: 0;
+      color: #ff8c00; /* Accent color */
+    }
+
+    /* Payment Section */
+    .payment-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    /* Form Box Styling */
+    .form-box {
+      background-color: rgba(26, 26, 26, 0.8); /* Dark transparent background */
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-box h2 {
+      color: #ff8c00;
+      margin-bottom: 20px;
+      font-size: 32px;
+      text-align: center;
+    }
+
+    /* Form Fields */
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-size: 16px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #222;
+      color: #fff;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #ff8c00;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e77c00; /* Hover effect */
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #121212;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      color: #777;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TrustTune Payment</h1>
+  </header>
+
+  <div class="payment-section">
+    <div class="form-box">
+      <h2>Confirm Your Payment Details</h2>
+
+      <form id="paymentForm" onsubmit="submitPayment(event)">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" placeholder="Enter your full name" required/>
+
+        <label for="plan">Selected Plan:</label>
+        <input type="text" id="plan" readonly/>
+
+        <label for="price">Price (₹):</label>
+        <input type="text" id="price" readonly/>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" placeholder="Enter your email address" required/>
+
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" placeholder="Enter your card number" required/>
+
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" id="expiryDate" placeholder="MM/YY" required/>
+
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" placeholder="Enter your CVV" required/>
+
+        <button type="submit">Proceed to Payment</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 TrustTune. All Rights Reserved.</p>
+  </div>
+
+  <script>
+    // Function to retrieve the query parameters and populate the payment form
+    function getQueryParams() {
+      const url = new URL(window.location.href);
+      const plan = url.searchParams.get('plan') || 'Not Selected';
+      const price = url.searchParams.get('price') || '0';
+      
+      document.getElementById('plan').value = plan;
+      document.getElementById('price').value = price;
+    }
+
+    // Submit payment details (mock function for now)
+    function submitPayment(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const plan = document.getElementById('plan').value;
+      const price = document.getElementById('price').value;
+      const email = document.getElementById('email').value;
+      const cardNumber = document.getElementById('cardNumber').value;
+      const expiryDate = document.getElementById('expiryDate').value;
+      const cvv = document.getElementById('cvv').value;
+
+      // Ensure all fields are filled out
+      if (!name || !plan || !price || !email || !cardNumber || !expiryDate || !cvv) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Display a simple confirmation (you can replace it with actual payment integration)
+      alert(`Payment Successful!\n\nPlan: ${plan}\nPrice: ₹${price}\nEmail: ${email}`);
+      
+      // Optionally, redirect to a "success" page
+      // window.location.href = "<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TrustTune - Payment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* Global styles */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #121212, #ff8c00); /* Dark gradient */
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Navbar Styling */
+    header {
+      background-color: #121212; /* Firebase dark navbar */
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Heavy shadow */
+    }
+    header h1 {
+      margin: 0;
+      color: #ff8c00; /* Accent color */
+    }
+
+    /* Payment Section */
+    .payment-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    /* Form Box Styling */
+    .form-box {
+      background-color: rgba(26, 26, 26, 0.8); /* Dark transparent background */
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-box h2 {
+      color: #ff8c00;
+      margin-bottom: 20px;
+      font-size: 32px;
+      text-align: center;
+    }
+
+    /* Form Fields */
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-size: 16px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #222;
+      color: #fff;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #ff8c00;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e77c00; /* Hover effect */
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #121212;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      color: #777;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TrustTune Payment</h1>
+  </header>
+
+  <div class="payment-section">
+    <div class="form-box">
+      <h2>Confirm Your Payment Details</h2>
+
+      <form id="paymentForm" onsubmit="submitPayment(event)">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" placeholder="Enter your full name" required/>
+
+        <label for="plan">Selected Plan:</label>
+        <input type="text" id="plan" readonly/>
+
+        <label for="price">Price (₹):</label>
+        <input type="text" id="price" readonly/>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" placeholder="Enter your email address" required/>
+
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" placeholder="Enter your card number" required/>
+
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" id="expiryDate" placeholder="MM/YY" required/>
+
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" placeholder="Enter your CVV" required/>
+
+        <button type="submit">Proceed to Payment</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 TrustTune. All Rights Reserved.</p>
+  </div>
+
+  <script>
+    // Function to retrieve the query parameters and populate the payment form
+    function getQueryParams() {
+      const url = new URL(window.location.href);
+      const plan = url.searchParams.get('plan') || 'Not Selected';
+      const price = url.searchParams.get('price') || '0';
+      
+      document.getElementById('plan').value = plan;
+      document.getElementById('price').value = price;
+    }
+
+    // Submit payment details (mock function for now)
+    function submitPayment(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const plan = document.getElementById('plan').value;
+      const price = document.getElementById('price').value;
+      const email = document.getElementById('email').value;
+      const cardNumber = document.getElementById('cardNumber').value;
+      const expiryDate = document.getElementById('expiryDate').value;
+      const cvv = document.getElementById('cvv').value;
+
+      // Ensure all fields are filled out
+      if (!name || !plan || !price || !email || !cardNumber || !expiryDate || !cvv) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Display a simple confirmation (you can replace it with actual payment integration)
+      alert(`Payment Successful!\n\nPlan: ${plan}\nPrice: ₹${price}\nEmail: ${email}`);
+      
+      // Optionally, redirect to a "success" page
+      // window.location.href = "payment-success.html";
+    }
+
+    // Load query parameters when the page loads
+    window.onload = getQueryParams;
+  </script>
+</body>
+  </html>payment-success.html";
+    }
+
+    // Load query parameters when the page loads
+    window.onload = getQueryParams;
+  </script>
+</body>
+          </html>
