@@ -15,9 +15,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       padding: 20px;
       box-sizing: border-box;
+      flex-direction: column;
     }
 
     /* Form Box */
@@ -29,6 +30,7 @@
       width: 100%;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
       text-align: center;
+      margin-bottom: 30px; /* Space before the footer */
     }
 
     h2 {
@@ -89,9 +91,7 @@
       padding: 20px 0;
       font-size: 14px;
       color: #777;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      margin-top: auto; /* Footer sticks to the bottom */
     }
 
   </style>
@@ -146,4 +146,4 @@
   </footer>
 
 </body>
-  </html>
+</html>
