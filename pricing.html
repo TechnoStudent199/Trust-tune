@@ -105,10 +105,10 @@
       color: #777;
     }
 
-    /* Scroll-triggered Hover Animation */
+    /* IntersectionObserver Effect */
     .card.in-view {
-      transform: scale(1.05);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      transform: scale(1.05); /* Apply zoom effect when card is in the viewport */
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Hover effect */
     }
 
   </style>
@@ -183,5 +183,27 @@
     </div>
   </div>
 
+  <script>
+    // IntersectionObserver to apply the hover effect when the card is in the viewport
+    const cards = document.querySelectorAll('.card');
+    const observerOptions = {
+      rootMargin: '0px 0px -50px 0px', // Triggering just before it hits the viewport
+      threshold: 0.5, // When 50% of the card is in view
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    }, observerOptions);
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  </script>
 </body>
-                                                                                                                                                     </html>
+                                                                                   </html>
