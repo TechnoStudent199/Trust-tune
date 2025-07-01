@@ -64,14 +64,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease-out;
-    }
-
-    /* Hover effect: scale the card slightly */
-    .card:hover {
-      transform: scale(1.08); /* Slight zoom-in effect on hover */
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Hover effect */
-      background-color: rgba(26, 26, 26, 0.9); /* Darker card background on hover */
+      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
     }
 
     .card h3 {
@@ -110,6 +103,12 @@
       padding: 20px 0;
       font-size: 14px;
       color: #777;
+    }
+
+    /* Scroll-triggered Hover Animation */
+    .card.in-view {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     }
 
   </style>
@@ -185,4 +184,4 @@
   </div>
 
 </body>
-  </html>
+                                                                                                                                                     </html>
