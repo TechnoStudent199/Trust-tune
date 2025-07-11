@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verify Payment - TrustTune</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      background: linear-gradient(45deg, #1d1d1d, #ff8c00);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }.verify-box {
+  background-color: rgba(26, 26, 26, 0.5);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+h2 {
+  color: #ff8c00;
+  margin-bottom: 25px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #222;
+  color: #fff;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff8c00;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #e07800;
+}
+
+.note {
+  font-size: 13px;
+  color: #ccc;
+  margin-top: 10px;
+}
+
+  </style>
+  <script>
+    function verifyPayment() {
+      const pid = document.getElementById("paymentId").value.trim();
+      const url = new URL(window.location.href);
+      const name = url.searchParams.get("name") || "Customer";
+      const plan = url.searchParams.get("plan") || "Plan";
+      const price = url.searchParams.get("price") || "0";
+      const orderId = url.searchParams.get("orderid") || "TT000000";// Better UPI ID validation
+  const upiRegex = /^[a-zA-Z0-9@._-]{10,}$/;
+  if (upiRegex.test(pid)) {
+    const thankYouUrl = `thankyou.html?name=${encodeURIComponent(name)}&plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(price)}&orderid=${orderId}`;
+    window.location.href = thankYouUrl;
+  } else {
+    alert("Invalid UPI Transaction ID. Must be at least 10 characters and look like a valid UPI ID.");
+  }
+}
+
+  </script>
+</head>
+<body>
+  <div class="verify-box">
+    <h2>Enter UPI Transaction ID</h2>
+    <input type="text" id="paymentId" placeholder="e.g. 2025UPI123456"/>
+    <button onclick="verifyPayment()">Verify Payment</button>
+    <p class="note">Your UPI Transaction ID must be at least 10 characters and valid.</p>
+  </div>
+</body>
+</html>
