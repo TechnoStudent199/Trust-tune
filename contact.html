@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(45deg, rgba(255, 140, 0, 0.3), rgba(18, 18, 18, 0.3)); /* More transparent */
+      background: linear-gradient(45deg, #ff8c00, #121212); /* Original gradient */
       color: #fff;
       display: flex;
       justify-content: center;
@@ -22,7 +22,7 @@
     }
 
     .form-box {
-      background: rgba(26, 26, 26, 0.75); /* More transparent dark box */
+      background: rgba(26, 26, 26, 0.9);
       padding: 40px 50px;
       border-radius: 12px;
       max-width: 450px;
@@ -84,16 +84,6 @@
       transform: scale(1.05);
     }
 
-    .contact-info {
-      margin-top: 25px;
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    .contact-info p {
-      margin: 5px 0;
-    }
-
     .footer {
       background-color: #121212;
       text-align: center;
@@ -117,13 +107,17 @@
     function goToPayment(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
       const plan = document.getElementById('plan').value;
       const price = document.getElementById('price').value;
-      if (!name || !plan || !price) {
+
+      if (!name || !email || !phone || !plan || !price) {
         alert('Please fill all details.');
         return;
       }
-      const params = new URLSearchParams({ name, plan, price });
+
+      const params = new URLSearchParams({ name, email, phone, plan, price });
       window.location.href = 'payment.html?' + params.toString();
     }
 
@@ -138,6 +132,12 @@
       <label for="name">Your Name:</label>
       <input type="text" id="name" placeholder="Enter your name" required />
 
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+
+      <label for="phone">Your Phone Number:</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required />
+
       <label for="plan">Selected Plan:</label>
       <input type="text" id="plan" readonly />
 
@@ -146,11 +146,6 @@
 
       <button type="submit">Continue to Payment</button>
     </form>
-
-    <div class="contact-info">
-      <p>📞 WhatsApp: <strong>9844976945</strong></p>
-      <p>✉️ Email: <strong>trusttune.help@gmail.com</strong></p>
-    </div>
   </div>
 
   <footer class="footer">
