@@ -67,18 +67,18 @@ button:hover {
   </style>
   <script>
     function verifyPayment() {
-      const pid = document.getElementById("paymentId").value.trim();
+      const pid = document.getElementById("paymentId").value.trim().toLowerCase();
       const url = new URL(window.location.href);
       const name = url.searchParams.get("name") || "Customer";
       const plan = url.searchParams.get("plan") || "Plan";
       const price = url.searchParams.get("price") || "0";
-      const orderId = url.searchParams.get("orderid") || "TT000000";// Better UPI ID validation
-  const upiRegex = /^[a-zA-Z0-9@._-]{10,}$/;
+      const orderId = url.searchParams.get("orderid") || "TT000000";// Updated regex to allow lowercase UPI-style IDs
+  const upiRegex = /^[a-z0-9@._-]{10,}$/;
   if (upiRegex.test(pid)) {
     const thankYouUrl = `thankyou.html?name=${encodeURIComponent(name)}&plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(price)}&orderid=${orderId}`;
     window.location.href = thankYouUrl;
   } else {
-    alert("Invalid UPI Transaction ID. Must be at least 10 characters and look like a valid UPI ID.");
+    alert("Invalid UPI Transaction ID. Must be at least 10 characters and use valid characters.");
   }
 }
 
@@ -87,9 +87,9 @@ button:hover {
 <body>
   <div class="verify-box">
     <h2>Enter UPI Transaction ID</h2>
-    <input type="text" id="paymentId" placeholder="e.g. 2025UPI123456"/>
+    <input type="text" id="paymentId" placeholder="e.g. 2025upi123456@paytm"/>
     <button onclick="verifyPayment()">Verify Payment</button>
-    <p class="note">Your UPI Transaction ID must be at least 10 characters and valid.</p>
+    <p class="note">Enter your UPI Transaction ID (at least 10 characters, no spaces).</p>
   </div>
 </body>
 </html>
