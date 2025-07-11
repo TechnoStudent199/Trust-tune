@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verify Payment - TrustTune</title>
@@ -15,17 +14,16 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-    }.verify-box {
-  background-color: rgba(26, 26, 26, 0.5);
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-}
-
-h2 {
+    }
+    .verify-box {
+      background-color: rgba(26, 26, 26, 0.5);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }h2 {
   color: #ff8c00;
   margin-bottom: 25px;
 }
@@ -67,18 +65,18 @@ button:hover {
   </style>
   <script>
     function verifyPayment() {
-      const pid = document.getElementById("paymentId").value.trim().toLowerCase();
+      const pid = document.getElementById("paymentId").value.trim();
       const url = new URL(window.location.href);
       const name = url.searchParams.get("name") || "Customer";
       const plan = url.searchParams.get("plan") || "Plan";
       const price = url.searchParams.get("price") || "0";
-      const orderId = url.searchParams.get("orderid") || "TT000000";// Updated regex to allow lowercase UPI-style IDs
-  const upiRegex = /^[a-z0-9@._-]{10,}$/;
+      const orderId = url.searchParams.get("orderid") || "TT000000";// UPPERCASE ONLY validation
+  const upiRegex = /^[A-Z0-9@._-]{10,}$/;
   if (upiRegex.test(pid)) {
     const thankYouUrl = `thankyou.html?name=${encodeURIComponent(name)}&plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(price)}&orderid=${orderId}`;
     window.location.href = thankYouUrl;
   } else {
-    alert("Invalid UPI Transaction ID. Must be at least 10 characters and use valid characters.");
+    alert("Invalid UPI Transaction ID. Use only UPPERCASE letters, numbers, and valid symbols. Minimum 10 characters.");
   }
 }
 
@@ -87,9 +85,9 @@ button:hover {
 <body>
   <div class="verify-box">
     <h2>Enter UPI Transaction ID</h2>
-    <input type="text" id="paymentId" placeholder="e.g. 2025upi123456@paytm"/>
+    <input type="text" id="paymentId" placeholder="e.g. 2025UPI123456@PAYTM"/>
     <button onclick="verifyPayment()">Verify Payment</button>
-    <p class="note">Enter your UPI Transaction ID (at least 10 characters, no spaces).</p>
+    <p class="note">Enter your UPI Transaction ID (only UPPERCASE letters, no spaces, min 10 characters).</p>
   </div>
 </body>
 </html>
