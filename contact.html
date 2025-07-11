@@ -6,11 +6,10 @@
   <title>Contact - TrustTune</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    /* Global Styles */
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(45deg, #ff8c00, #121212); /* Firebase-inspired gradient */
+      background: linear-gradient(45deg, rgba(255, 140, 0, 0.3), rgba(18, 18, 18, 0.3)); /* More transparent */
       color: #fff;
       display: flex;
       justify-content: center;
@@ -22,22 +21,21 @@
       position: relative;
     }
 
-    /* Form Box */
     .form-box {
-      background: rgba(26, 26, 26, 0.9); /* Slightly transparent dark background */
+      background: rgba(26, 26, 26, 0.75); /* More transparent dark box */
       padding: 40px 50px;
       border-radius: 12px;
       max-width: 450px;
       width: 100%;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
       text-align: center;
-      margin-bottom: 30px; /* Space before footer */
+      margin-bottom: 30px;
       z-index: 1;
     }
 
     h2 {
       font-size: 28px;
-      color: #ff8c00; /* Firebase accent color */
+      color: #ff8c00;
       margin-bottom: 20px;
     }
 
@@ -63,7 +61,7 @@
 
     input:focus {
       background-color: #333;
-      border: 1px solid #ff8c00; /* Focus border color */
+      border: 1px solid #ff8c00;
       outline: none;
     }
 
@@ -86,7 +84,16 @@
       transform: scale(1.05);
     }
 
-    /* Footer */
+    .contact-info {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .contact-info p {
+      margin: 5px 0;
+    }
+
     .footer {
       background-color: #121212;
       text-align: center;
@@ -97,10 +104,8 @@
       bottom: 0;
       width: 100%;
     }
-
   </style>
   <script>
-    // Extracting the query parameters and filling the form
     function getQueryParams() {
       const url = new URL(window.location.href);
       const plan = url.searchParams.get('plan') || '';
@@ -109,7 +114,6 @@
       document.getElementById('price').value = price;
     }
 
-    // Proceed to payment with form validation
     function goToPayment(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
@@ -123,7 +127,6 @@
       window.location.href = 'payment.html?' + params.toString();
     }
 
-    // Initialize form with query params
     window.onload = getQueryParams;
   </script>
 </head>
@@ -143,6 +146,11 @@
 
       <button type="submit">Continue to Payment</button>
     </form>
+
+    <div class="contact-info">
+      <p>📞 WhatsApp: <strong>9844976945</strong></p>
+      <p>✉️ Email: <strong>trusttune.help@gmail.com</strong></p>
+    </div>
   </div>
 
   <footer class="footer">
