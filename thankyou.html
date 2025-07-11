@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Successful | TrustTune</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(45deg, #0f0f0f, #1a1a1a);
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }.success-circle {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #25d366, #128c7e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px 6px rgba(37, 211, 102, 0.6);
+  animation: pop 1s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+.success-circle svg {
+  width: 64px;
+  height: 64px;
+  stroke: #fff;
+  stroke-width: 6;
+  fill: none;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: draw 1s forwards ease 2s;
+}
+
+.info-box {
+  margin-top: 30px;
+  opacity: 0;
+  animation: fadein 1s ease 3s forwards, moveup 1s ease 3s forwards;
+}
+
+.info-box h1 {
+  font-size: 22px;
+  color: #ff8c00;
+  margin: 10px 0;
+}
+
+.info-box p {
+  font-size: 14px;
+  color: #ccc;
+  margin: 5px 0;
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pop {
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadein {
+  to { opacity: 1; }
+}
+
+@keyframes moveup {
+  0% { transform: translateY(40px); }
+  100% { transform: translateY(0); }
+}
+
+  </style>
+</head>
+<body>  <div class="success-circle">
+    <svg viewBox="0 0 52 52">
+      <path d="M14 27 L22 35 L38 19" />
+    </svg>
+  </div>  <div class="info-box" id="info">
+    <h1>✅ Order Placed!</h1>
+    <p id="summary"></p>
+    <p>Your subscription will be delivered in 6–24 hours.</p>
+  </div>  <!-- ✅ Sound -->  <audio id="sound" autoplay>
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-confirmation-tone-2863.mp3" type="audio/mp3">
+  </audio>  <!-- ✅ Confetti -->  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>  <script>
+    document.body.addEventListener('click', () => {
+      document.getElementById('sound').play();
+    });
+
+    const duration = 3 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 25, spread: 360, ticks: 60, zIndex: 1000 };
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+      if (timeLeft <= 0) return clearInterval(interval);
+
+      confetti({
+        particleCount: 50,
+        origin: { x: randomInRange(0.1, 0.9), y: Math.random() - 0.2 },
+        ...defaults
+      });
+    }, 250);
+  </script>  <!-- ✅ PDF RECEIPT -->  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get("name") || "Customer";
+    const plan = urlParams.get("plan") || "Unknown Plan";
+    const price = urlParams.get("price") || "0";
+    const orderId = urlParams.get("orderid") || "TT000000";
+
+    document.getElementById("summary").innerHTML = `Thank you <strong>${name}</strong> for purchasing <strong>${plan}</strong> (₹${price}).<br/>Order ID: <strong>${orderId}</strong>`;
+
+    window.onload = async () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.text("TrustTune", 105, 20, null, null, "center");
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(12);
+      doc.text(`🧾 Order Receipt`, 105, 30, null, null, "center");
+
+      doc.setFontSize(11);
+      doc.text(`Name: ${name}`, 20, 50);
+      doc.text(`Plan: ${plan}`, 20, 60);
+      doc.text(`Price: ₹${price}`, 20, 70);
+      doc.text(`Order ID: ${orderId}`, 20, 80);
+      doc.text(`Delivery Time: 6–24 hours`, 20, 90);
+
+      doc.setTextColor(150);
+      doc.setFontSize(10);
+      doc.text("Thank you for choosing TrustTune ❤️", 20, 110);
+
+      doc.save(`TrustTune_Receipt_${name}.pdf`);
+    };
+  </script></body>
+</html>
