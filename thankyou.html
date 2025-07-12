@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payment Successful | TrustTune</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -18,35 +19,19 @@
       align-items: center;
       text-align: center;
       overflow: hidden;
-    }.success-circle {
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle, #25d366, #128c7e);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 20px 6px rgba(37, 211, 102, 0.6);
-  animation: pop 1s ease forwards;
-  animation-delay: 1s;
-  opacity: 0;
-}
-
-.success-circle svg {
-  width: 64px;
-  height: 64px;
-  stroke: #fff;
-  stroke-width: 6;
-  fill: none;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: draw 1s forwards ease 2s;
+      position: relative;
+    }.lottie-wrapper {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 10px;
+  margin-top: -80px;
+  animation: moveup 1s ease-out forwards;
 }
 
 .info-box {
-  margin-top: 30px;
+  margin-top: -20px;
   opacity: 0;
-  animation: fadein 1s ease 3s forwards, moveup 1s ease 3s forwards;
+  animation: fadein 1s ease 2s forwards, moveup 1s ease 2s forwards;
 }
 
 .info-box h1 {
@@ -61,12 +46,24 @@
   margin: 5px 0;
 }
 
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
+.whatsapp-link {
+  position: absolute;
+  bottom: 20px;
+  text-decoration: none;
+  background-color: #25D366;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
 }
 
-@keyframes pop {
-  to { transform: scale(1); opacity: 1; }
+.whatsapp-link img {
+  width: 20px;
+  height: 20px;
 }
 
 @keyframes fadein {
@@ -80,40 +77,48 @@
 
   </style>
 </head>
-<body>  <div class="success-circle">
-    <svg viewBox="0 0 52 52">
-      <path d="M14 27 L22 35 L38 19" />
-    </svg>
-  </div>  <div class="info-box" id="info">
+<body>  <div class="lottie-wrapper">
+    <lottie-player
+      src="https://assets1.lottiefiles.com/packages/lf20_jbrw3hcz.json"
+      background="transparent"
+      speed="1"
+      style="width: 100%; height: 100%;"
+      autoplay
+    ></lottie-player>
+  </div>  <div class="info-box">
     <h1>✅ Order Placed!</h1>
     <p id="summary"></p>
     <p>Your subscription will be delivered in 6–24 hours.</p>
   </div>  <!-- ✅ Sound -->  <audio id="sound" autoplay>
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-confirmation-tone-2863.mp3" type="audio/mp3">
   </audio>  <!-- ✅ Confetti -->  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>  <script>
-    document.body.addEventListener('click', () => {
-      document.getElementById('sound').play();
+    window.addEventListener("DOMContentLoaded", () => {
+      const sound = document.getElementById("sound");
+      sound.play().catch(() => {});
+
+      const duration = 3 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 25, spread: 360, ticks: 60, zIndex: 1000 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(() => {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) return clearInterval(interval);
+
+        confetti({
+          particleCount: 50,
+          origin: { x: randomInRange(0.1, 0.9), y: Math.random() - 0.2 },
+          ...defaults
+        });
+      }, 250);
     });
+  </script><a class="whatsapp-link" target="_blank"
+href="https://wa.me/9844976945?text=Hi%20TrustTune%2C%20I%20have%20completed%20the%20payment.%20Please%20verify%20my%20order.%20Thank%20you!"> <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" /> Message Us on WhatsApp </a>
 
-    const duration = 3 * 1000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 25, spread: 360, ticks: 60, zIndex: 1000 };
-
-    function randomInRange(min, max) {
-      return Math.random() * (max - min) + min;
-    }
-
-    const interval = setInterval(() => {
-      const timeLeft = animationEnd - Date.now();
-      if (timeLeft <= 0) return clearInterval(interval);
-
-      confetti({
-        particleCount: 50,
-        origin: { x: randomInRange(0.1, 0.9), y: Math.random() - 0.2 },
-        ...defaults
-      });
-    }, 250);
-  </script>  <!-- ✅ PDF RECEIPT -->  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  <script>
+  <script>
     const urlParams = new URLSearchParams(window.location.search);
     const name = urlParams.get("name") || "Customer";
     const plan = urlParams.get("plan") || "Unknown Plan";
@@ -121,31 +126,5 @@
     const orderId = urlParams.get("orderid") || "TT000000";
 
     document.getElementById("summary").innerHTML = `Thank you <strong>${name}</strong> for purchasing <strong>${plan}</strong> (₹${price}).<br/>Order ID: <strong>${orderId}</strong>`;
-
-    window.onload = async () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(18);
-      doc.text("TrustTune", 105, 20, null, null, "center");
-
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(12);
-      doc.text(`🧾 Order Receipt`, 105, 30, null, null, "center");
-
-      doc.setFontSize(11);
-      doc.text(`Name: ${name}`, 20, 50);
-      doc.text(`Plan: ${plan}`, 20, 60);
-      doc.text(`Price: ₹${price}`, 20, 70);
-      doc.text(`Order ID: ${orderId}`, 20, 80);
-      doc.text(`Delivery Time: 6–24 hours`, 20, 90);
-
-      doc.setTextColor(150);
-      doc.setFontSize(10);
-      doc.text("Thank you for choosing TrustTune ❤️", 20, 110);
-
-      doc.save(`TrustTune_Receipt_${name}.pdf`);
-    };
   </script></body>
 </html>
