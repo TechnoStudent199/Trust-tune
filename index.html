@@ -4,175 +4,419 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TrustTune - Premium Subscriptions</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
   <style>
-    /* Global styles */
+    /* Global styles - Firebase Studio Colors on TrustTune Structure */
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #121212, #ff8c00); /* Dark to vibrant gradient */
-      color: #fff;
+      background-color: #000000; /* Pure black for uniform background */
+      color: #e8eaed; /* Light grey for primary text */
+      font-family: 'Roboto', 'Poppins', sans-serif; /* Blending fonts */
       line-height: 1.6;
       font-size: 16px;
       overflow-x: hidden;
     }
 
-    /* Navbar Styling */
-    .navbar {
-      background-color: #121212; /* Dark navbar */
-      padding: 20px 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Heavy shadow for floating effect */
-    }
+    /* General Container */
     .container {
       width: 90%;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Navbar/Header Styling - Subtle initial background, Blurred on Scroll */
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.1); /* Very subtle initial dark background */
+      backdrop-filter: blur(2px); /* Slight blur always present for "cool" effect */
+      padding: 18px 0; /* Initial padding */
+      box-shadow: none; /* No shadow initially */
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: background-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease;
+    }
+    /* Navbar scrolled state */
+    .navbar.scrolled {
+      background-color: rgba(0, 0, 0, 0.7); /* Deeper semi-transparent black when scrolled */
+      backdrop-filter: blur(8px); /* Stronger blur effect */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Stronger shadow when scrolled */
+      padding: 5px 0; /* Reduced padding when scrolled to truly touch top */
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
     }
     .logo {
-      color: #ff8c00; /* Firebase accent color */
-      font-size: 28px;
-      font-weight: 600;
+      color: #ff6d00; /* Firebase orange for the logo */
+      font-family: 'Poppins', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
     }
-    nav ul {
+
+    /* Hamburger Menu Icon Styling */
+    .hamburger-menu {
+      width: 30px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .hamburger-menu .bar {
+      width: 100%;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease-in-out;
+    }
+    .hamburger-menu.active .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-menu.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-menu.active .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Mobile Navigation Menu Styling */
+    .mobile-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.9); /* Slightly more opaque black for mobile menu */
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8);
       list-style: none;
       padding: 0;
-      display: flex;
-      gap: 30px;
+      margin: 0;
+      display: none;
+      flex-direction: column;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    nav a {
-      color: #fff;
+    .mobile-nav.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mobile-nav li {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .mobile-nav li:last-child {
+      border-bottom: none;
+    }
+    .mobile-nav a {
+      display: block;
+      padding: 15px 0;
+      color: #bdc1c6;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s, transform 0.2s;
+      font-size: 18px;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
-    nav a:hover {
-      color: #ff8c00; /* Accent hover */
-      transform: scale(1.1); /* Slight zoom effect */
+    .mobile-nav a:hover {
+      background-color: rgba(255, 109, 0, 0.1);
+      color: #ff6d00;
     }
 
-    /* Hero Section */
+    /* Hero Section (TrustTune Content) */
     .hero {
-      background: url('https://godspeedottstore.netlify.app/static/media/banner.6eead5ac33944dbb839d.jpg') no-repeat center/cover;
-      background-size: cover;
-      padding: 120px 0;
+      background: url('https://godspeedottstore.netlify.app/static/media/banner.6eead5ac33944dbb839d.jpg') no-repeat center center/cover;
+      padding: 160px 0;
       text-align: center;
       color: #fff;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 100px; /* Increased gap below hero section */
+    }
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.85); /* Even darker overlay for more perceived transparency on navbar */
+        backdrop-filter: blur(2px);
+        z-index: 0;
+    }
+    .hero .container {
+        position: relative;
+        z-index: 1;
     }
     .hero h2 {
-      font-size: 48px;
-      margin-bottom: 20px;
-      font-weight: 600;
-      color: #fff;
+      font-size: 56px;
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
     }
     .hero p {
-      font-size: 20px;
-      margin-bottom: 30px;
-      color: #ddd;
+      font-size: 24px;
+      margin-bottom: 45px;
+      color: #bdc1c6;
+      font-weight: 300;
     }
     .btn {
-      background-color: #ff8c00; /* Firebase accent color */
-      color: #fff;
-      padding: 16px 36px;
-      border-radius: 10px;
+      background-color: #ea4335; /* Firebase Studio button color */
+      color: #ffffff;
+      padding: 18px 45px;
+      border-radius: 6px;
       text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s, transform 0.3s;
+      font-weight: 600;
+      font-size: 18px;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      display: inline-block;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 6px 25px rgba(234, 67, 53, 0.5); /* Glow using button color */
     }
     .btn:hover {
-      background-color: #e77c00; /* Darker orange for hover effect */
-      transform: scale(1.05);
+      background-color: #c93b2a;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(234, 67, 53, 0.7);
     }
 
-    /* Features Section */
+    /* Features Section (TrustTune Content) */
     .features {
-      padding: 60px 0;
-      background-color: #121212;
+      padding: 90px 0;
+      background-color: #000000; /* Pure black for features section */
       text-align: center;
+      position: relative;
     }
     .features h3 {
-      font-size: 32px;
-      margin-bottom: 40px;
-      color: #ff8c00; /* Accent color */
+      font-size: 42px;
+      margin-bottom: 60px;
+      color: #ff6d00; /* Orange accent for heading */
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 0; /* NO GAP between feature boxes */
       justify-items: center;
+      align-items: start;
     }
+    
+    /* Feature Box Outer Container - For the rotating border effect */
     .feature-box {
-      background-color: #333;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Floating card effect */
-      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      border-radius: 8px; /* Outer radius for the glow */
+      background: transparent; /* This will let the glow show through */
+      overflow: hidden; /* Crucial to clip the rotating gradient */
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Base shadow for the box */
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      padding: 1px; /* Small padding to allow inner box to be slightly smaller and reveal glow */
     }
+
+    /* Pseudo-element for the MOVING GRADIENT BORDER */
+    .feature-box::before {
+      content: '';
+      position: absolute;
+      top: -100%; /* Position the gradient far enough to move */
+      left: -100%;
+      width: 300%; /* Large enough to cover the box and rotate */
+      height: 300%;
+      /* Conic gradient for the rotating "light" effect */
+      background: conic-gradient(
+        from 0deg at 50% 50%,
+        rgba(255, 109, 0, 0) 0%, /* Transparent */
+        rgba(255, 109, 0, 0.8) 5%, /* Peak glow */
+        rgba(255, 109, 0, 0) 15%, /* Fade out */
+        rgba(255, 109, 0, 0) 100%
+      );
+      animation: rotateGlow 8s linear infinite; /* EVEN SLOWER rotation for subtle movement */
+      z-index: 0; /* Behind the inner content */
+      border-radius: inherit; /* Inherit rounded corners */
+    }
+
+    /* Keyframes for the rotating border glow */
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Inner Box to hold content and create the "border" cutout */
+    .feature-box-inner {
+      background-color: rgba(255, 255, 255, 0.05); /* The actual card background color */
+      border-radius: 7px; /* Slightly smaller than outer to create the glowing border */
+      padding: 40px; /* Original padding for content */
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative; /* Ensure content is on top */
+      z-index: 1; /* Above the ::before glow */
+    }
+
+    /* Apply glow animation only when scrolled-in */
+    .features.scrolled-in .feature-box::before {
+        /* Animation applied directly to ::before, no need for extra class here */
+        display: block; /* Ensure it's visible if it was hidden initially */
+    }
+    .features.scrolled-in .feature-box {
+        /* Add a very subtle static glow when in view, to complement animation */
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 109, 0, 0.2);
+    }
+
     .feature-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Hover floating effect */
+      transform: translateY(-8px);
+      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 109, 0, 0.6);
     }
+    .feature-box:hover::before {
+        animation-play-state: paused; /* Pause the glow animation on hover (optional) */
+        /* Or change background for a static glow on hover */
+        background: conic-gradient(
+          from 0deg at 50% 50%,
+          rgba(255, 109, 0, 0.8) 0%,
+          rgba(255, 109, 0, 0.8) 100%
+        ); /* Solid glow on hover */
+    }
+
     .feature-box h4 {
-      color: #ff8c00;
-      margin-bottom: 15px;
-      font-size: 20px;
+      color: #ff6d00;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
     }
     .feature-box p {
-      color: #ddd;
-      font-size: 14px;
+      color: #bdc1c6;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
     /* Footer Section */
     .footer {
-      background-color: #121212;
+      background-color: #000000; /* Pure black for footer */
       text-align: center;
-      padding: 20px 0;
+      padding: 30px 0;
       font-size: 14px;
-      color: #777;
+      color: #808080;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* AI Powered label */
-    .ai-powered {
-      background-color: #ff8c00;
-      padding: 5px 15px;
-      border-radius: 20px;
-      color: #fff;
-      font-size: 14px;
-      display: inline-block;
-      margin-bottom: 20px;
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 42px;
+      }
+      .hero p {
+        font-size: 20px;
+      }
+      .features h3 {
+        font-size: 34px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 0; /* Keep gap at 0 on small screens */
+      }
+      .navbar .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .mobile-nav {
+        left: 0;
+        right: 0;
+        width: 100%;
+      }
     }
 
+    @media (max-width: 480px) {
+        .hero h2 {
+            font-size: 32px;
+        }
+        .hero p {
+            font-size: 16px;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+        .features h3 {
+            font-size: 28px;
+        }
+        .feature-box-inner { /* Adjust inner padding for smaller screens */
+            padding: 30px;
+        }
+    }
   </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+  <header class="navbar" id="mainNavbar">
+    <div class="container">
       <h1 class="logo">TrustTune</h1>
+      <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
     </div>
+    <ul class="mobile-nav" id="mobileNav">
+      <li><a href="#">Home</a></li>
+      <li><a href="pricing.html">Plans</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
   </header>
 
   <section class="hero">
     <div class="container">
       <h2>Welcome to TrustTune Premium Subscriptions</h2>
       <p>OTT • Music • Creative • Combo Deals – All in One Place</p>
-      <a href="pricing.html" class="btn">View Plans</a>
+      <a href="pricing.html" class="btn">View Plans Now</a>
     </div>
   </section>
 
-  <section class="features">
+  <section class="features" id="featuresSection">
     <div class="container">
       <h3>Why Choose Us?</h3>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>HD/4K Content</h4>
-          <p>Stream high-quality content on all devices.</p>
+          <div class="feature-box-inner">
+            <h4>HD/4K Content</h4>
+            <p>Stream high-quality content on all devices.</p>
+          </div>
         </div>
         <div class="feature-box">
-          <h4>Affordable Prices</h4>
-          <p>Plans starting at just ₹25!</p>
+          <div class="feature-box-inner">
+            <h4>Affordable Prices</h4>
+            <p>Plans starting at just ₹25!</p>
+          </div>
         </div>
         <div class="feature-box">
-          <h4>Instant Activation</h4>
-          <p>Delivered quickly on your mail or phone.</p>
+          <div class="feature-box-inner">
+            <h4>Instant Activation</h4>
+            <p>Delivered quickly on your mail or phone.</p>
+          </div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-box-inner">
+            <h4>24/7 Dedicated Support</h4>
+            <p>Our team is always here to help. Experience unparalleled customer service whenever you need assistance with your subscriptions.</p>
+          </div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-box-inner">
+            <h4>Curated Combo Deals</h4>
+            <p>Unlock exclusive bundles combining your favorite OTT, music, and creative platforms for even greater savings and convenience.</p>
+          </div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-box-inner">
+            <h4>Secure & Private Transactions</h4>
+            <p>Your data and payments are protected with top-tier encryption, ensuring a secure and worry-free experience every time.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -180,8 +424,62 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 TrustTune Premium Subscriptions. All rights reserved.</p>
+      <p>&copy; 2025 TrustTune Premium Subscriptions. All rights reserved. | Powered by TrustTune</p>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburgerMenu = document.getElementById('hamburgerMenu');
+      const mobileNav = document.getElementById('mobileNav');
+      const mainNavbar = document.getElementById('mainNavbar');
+      const featuresSection = document.getElementById('featuresSection');
+
+      hamburgerMenu.addEventListener('click', function() {
+        hamburgerMenu.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+      });
+
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+          hamburgerMenu.classList.remove('active');
+          mobileNav.classList.remove('active');
+          document.body.classList.remove('no-scroll');
+        });
+      });
+
+      // Navbar scroll effect
+      const scrollThreshold = 50; // Pixels scrolled before navbar changes
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > scrollThreshold) {
+          mainNavbar.classList.add('scrolled');
+        } else {
+          mainNavbar.classList.remove('scrolled');
+        }
+      });
+
+      // Features section glow on scroll using Intersection Observer
+      const featuresObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            featuresSection.classList.add('scrolled-in');
+          } else {
+            featuresSection.classList.remove('scrolled-in'); // Remove class when out of view
+          }
+        });
+      }, {
+        rootMargin: '0px',
+        threshold: 0.2 // Trigger when 20% of the section is visible
+      });
+
+      featuresObserver.observe(featuresSection);
+    });
+  </script>
+  <style>
+    body.no-scroll {
+        overflow: hidden;
+    }
+  </style>
 </body>
-</html>
+  </html>
