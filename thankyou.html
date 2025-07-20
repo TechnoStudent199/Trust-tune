@@ -1,130 +1,214 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Payment Successful | TrustTune</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <title>TrustTune - Verifying</title>
   <style>
-    html, body {
+    :root {
+      --green: #25D366;
+      --bg: #0d0d0d;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      height: 100%;
-      background: linear-gradient(45deg, #0f0f0f, #1a1a1a);
+    }
+
+    body {
       font-family: 'Poppins', sans-serif;
-      color: white;
+      background-color: var(--bg);
+      color: #fff;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
       overflow: hidden;
-      position: relative;
-    }.lottie-wrapper {
-  width: 250px;
-  height: 250px;
-  margin-bottom: 10px;
-  margin-top: -80px;
-  animation: moveup 1s ease-out forwards;
-}
+    }
 
-.info-box {
-  margin-top: -20px;
-  opacity: 0;
-  animation: fadein 1s ease 2s forwards, moveup 1s ease 2s forwards;
-}
+    .progress-area {
+      width: 90%;
+      max-width: 500px;
+      padding: 0;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
 
-.info-box h1 {
-  font-size: 22px;
-  color: #ff8c00;
-  margin: 10px 0;
-}
+    .percent-text {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px var(--green);
+      animation: pulse 2s infinite;
+    }
 
-.info-box p {
-  font-size: 14px;
-  color: #ccc;
-  margin: 5px 0;
-}
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
 
-.whatsapp-link {
-  position: absolute;
-  bottom: 20px;
-  text-decoration: none;
-  background-color: #25D366;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-}
+    .bar-container {
+      width: 100%;
+      height: 25px;
+      background: #1a1a1a;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
 
-.whatsapp-link img {
-  width: 20px;
-  height: 20px;
-}
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #25D366, #1DA851);
+      transition: width 0.1s linear;
+      border-radius: 50px;
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.8);
+    }
 
-@keyframes fadein {
-  to { opacity: 1; }
-}
+    .dots {
+      font-size: 1.2rem;
+      color: #aaa;
+      margin-bottom: 15px;
+      letter-spacing: 3px;
+      animation: blink 1s steps(5, start) infinite;
+    }
 
-@keyframes moveup {
-  0% { transform: translateY(40px); }
-  100% { transform: translateY(0); }
-}
+    @keyframes blink {
+      0% { opacity: 0.2; }
+      50% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
 
+    .success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 6px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pop 0.6s ease-out;
+      margin-bottom: 20px;
+    }
+
+    .tick {
+      color: var(--green);
+      font-size: 60px;
+      transform: scale(0);
+      animation: tickPop 0.4s 0.4s ease-out forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes tickPop {
+      to { transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 10px 0;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 0.7s forwards;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #ccc;
+      text-align: center;
+      max-width: 300px;
+      margin: 0;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 0.9s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .whatsapp-link {
+      margin-top: 20px;
+      background-color: var(--green);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .whatsapp-link:hover {
+      transform: scale(1.05);
+    }
+
+    .whatsapp-link img {
+      width: 22px;
+      height: 22px;
+    }
   </style>
 </head>
-<body>  <div class="lottie-wrapper">
-    <lottie-player
-      src="https://assets1.lottiefiles.com/packages/lf20_jbrw3hcz.json"
-      background="transparent"
-      speed="1"
-      style="width: 100%; height: 100%;"
-      autoplay
-    ></lottie-player>
-  </div>  <div class="info-box">
-    <h1>✅ Order Placed!</h1>
-    <p id="summary"></p>
-    <p>Your subscription will be delivered in 6–24 hours.</p>
-  </div>  <!-- ✅ Sound -->  <audio id="sound" autoplay>
-    <source src="https://assets.mixkit.co/sfx/preview/mixkit-confirmation-tone-2863.mp3" type="audio/mp3">
-  </audio>  <!-- ✅ Confetti -->  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>  <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      const sound = document.getElementById("sound");
-      sound.play().catch(() => {});
+<body>
 
-      const duration = 3 * 1000;
-      const animationEnd = Date.now() + duration;
-      const defaults = { startVelocity: 25, spread: 360, ticks: 60, zIndex: 1000 };
+  <div class="progress-area" id="progressArea">
+    <div class="dots">Verifying</div>
+    <div class="percent-text" id="percentText">0%</div>
+    <div class="bar-container">
+      <div class="bar-fill" id="barFill"></div>
+    </div>
+  </div>
 
-      function randomInRange(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      const interval = setInterval(() => {
-        const timeLeft = animationEnd - Date.now();
-        if (timeLeft <= 0) return clearInterval(interval);
-
-        confetti({
-          particleCount: 50,
-          origin: { x: randomInRange(0.1, 0.9), y: Math.random() - 0.2 },
-          ...defaults
-        });
-      }, 250);
-    });
-  </script><a class="whatsapp-link" target="_blank"
-href="https://wa.me/9844976945?text=Hi%20TrustTune%2C%20I%20have%20completed%20the%20payment.%20Please%20verify%20my%20order.%20Thank%20you!"> <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" /> Message Us on WhatsApp </a>
+  <div class="success" id="successScreen">
+    <div class="circle">
+      <div class="tick">✔</div>
+    </div>
+    <h1>Payment Verified</h1>
+    <p>Thank you for choosing TrustTune. We've received your payment successfully.</p>
+    <a class="whatsapp-link" target="_blank"
+      href="https://wa.me/9844976945?text=Hi%20TrustTune%2C%20I%20have%20completed%20the%20payment.%20Please%20verify%20my%20order.%20Thank%20you!">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+      Message Us
+    </a>
+  </div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get("name") || "Customer";
-    const plan = urlParams.get("plan") || "Unknown Plan";
-    const price = urlParams.get("price") || "0";
-    const orderId = urlParams.get("orderid") || "TT000000";
+    const bar = document.getElementById('barFill');
+    const percentText = document.getElementById('percentText');
+    const progressArea = document.getElementById('progressArea');
+    const successScreen = document.getElementById('successScreen');
 
-    document.getElementById("summary").innerHTML = `Thank you <strong>${name}</strong> for purchasing <strong>${plan}</strong> (₹${price}).<br/>Order ID: <strong>${orderId}</strong>`;
-  </script></body>
+    let percent = 0;
+    const interval = setInterval(() => {
+      percent++;
+      bar.style.width = percent + "%";
+      percentText.textContent = percent + "%";
+
+      if (percent >= 99) {
+        clearInterval(interval);
+        setTimeout(() => {
+          progressArea.style.display = "none";
+          successScreen.style.display = "flex";
+        }, 700);
+      }
+    }, 30);
+  </script>
+
+</body>
 </html>
