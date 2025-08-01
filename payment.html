@@ -4,142 +4,165 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payment - TrustTune</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Inter font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    body { 
-      background: linear-gradient(45deg, #1d1d1d, #ff8c00);
-      color: #fff; 
-      font-family: 'Poppins', sans-serif; 
-      padding: 30px; 
-      margin: 0;
+    /* Custom CSS for gradient and animations */
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-color: #000000;
+      color: #e8eaed;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .logo-gradient {
+      background: -webkit-linear-gradient(45deg, #5a67d8, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .payment-container {
-      background-color: rgba(26, 26, 26, 0.5);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
       max-width: 700px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 10;
     }
-
-    h2 {
-      color: #ff8c00;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
+    
     .summary-box {
-      background-color: rgba(26, 26, 26, 0.5);
+      background-color: #222;
       padding: 25px;
       border-radius: 10px;
     }
-
-    .summary-box p {
-      font-size: 16px;
-      margin-bottom: 15px;
-    }
-
-    .highlight {
-      color: #ff8c00;
-      font-weight: bold;
-    }
-
+    
     .upi-copy {
-      background: #222;
+      background-color: #2a2a2a;
       padding: 10px;
-      border-radius: 5px;
+      border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #fff;
     }
 
-    .upi-copy button {
-      background: #ff8c00;
-      color: #fff;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .qr-code {
-      margin-top: 30px;
+    /* Message box styles */
+    .message-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.9);
+      border: 2px solid #5a67d8;
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 350px;
+      width: 90%;
+      z-index: 1000;
       text-align: center;
-      background: rgba(26, 26, 26, 0.5);
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 5px 25px rgba(90, 103, 216, 0.5);
     }
-
-    .qr-code img {
-      width: 200px;
-      height: 200px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    .message-box h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #a855f7;
+      margin-bottom: 12px;
     }
-
-    .paid-container {
-      background: rgba(26, 26, 26, 0.5);
-      margin-top: 30px;
-      padding: 25px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    .message-box p {
+      font-size: 16px;
+      color: #e8eaed;
+      margin-bottom: 20px;
     }
-
-    .paid-btn {
-      display: inline-block;
-      margin-top: 10px;
-      background-color: #ff8c00;
+    .message-box button {
+      background-color: #5a67d8;
       color: #fff;
-      padding: 12px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
     }
-
-    .paid-btn:hover {
-      background-color: #e07c00;
+    .message-box button:hover {
+      background-color: #434fba;
     }
   </style>
+</head>
+<body>
+  
+  <div class="payment-container p-8 md:p-10">
+    <h2 class="text-3xl md:text-4xl font-bold logo-gradient text-center mb-8">Complete Your Payment</h2>
+    <div class="summary-box space-y-4">
+      <div id="summary">
+        <!-- Details will be injected by JavaScript -->
+      </div>
+    </div>
+  </div>
+
   <script>
+    // JavaScript for URL parameter parsing, UPI copy, and message pop-ups
+    function showMessage(title, message, callback) {
+      const existingMessageBox = document.getElementById('message-box-container');
+      if (existingMessageBox) existingMessageBox.remove();
+      
+      const messageBoxContainer = document.createElement('div');
+      messageBoxContainer.id = 'message-box-container';
+      messageBoxContainer.className = 'fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[999]';
+      messageBoxContainer.innerHTML = `
+        <div class="message-box">
+          <h3>${title}</h3>
+          <p>${message}</p>
+          <button id="close-message-box">OK</button>
+        </div>
+      `;
+      document.body.appendChild(messageBoxContainer);
+      
+      document.getElementById('close-message-box').addEventListener('click', () => {
+        messageBoxContainer.remove();
+        if (callback) callback();
+      });
+    }
+
     function showSummary() {
       const url = new URL(window.location.href);
       const name = url.searchParams.get('name') || 'Customer';
       const plan = url.searchParams.get('plan') || 'Unknown Plan';
       const price = url.searchParams.get('price') || '0';
       const orderId = 'TT' + Math.floor(Math.random() * 1000000);
-      localStorage.setItem('trusstune_order_id', orderId);
-
+      
       const upiID = "9108176778@fam";
       const upiLink = `upi://pay?pa=${upiID}&pn=TrustTune&mc=123456&tid=${orderId}&tr=${orderId}&tn=${encodeURIComponent(plan)}&am=${price}&cu=INR`;
 
-      document.getElementById('summary').innerHTML = `
-        <p><strong>Name:</strong> <span class="highlight">${name}</span></p>
-        <p><strong>Plan:</strong> ${plan}</p>
-        <p><strong>Price:</strong> ₹${price}</p>
-        <p><strong>Order ID:</strong> <span class="highlight">${orderId}</span></p>
+      const summaryDiv = document.getElementById('summary');
+      summaryDiv.innerHTML = `
+        <p class="text-lg"><span class="font-bold text-white">Name:</span> <span class="text-indigo-400">${decodeURIComponent(name)}</span></p>
+        <p class="text-lg"><span class="font-bold text-white">Plan:</span> ${decodeURIComponent(plan)}</p>
+        <p class="text-lg"><span class="font-bold text-white">Price:</span> ₹${decodeURIComponent(price)}</p>
+        <p class="text-lg"><span class="font-bold text-white">Order ID:</span> <span class="text-indigo-400">${orderId}</span></p>
 
-        <div class="upi-copy">
-          <span id="upi-text">${upiID}</span>
-          <button onclick="copyUPI()">Copy</button>
+        <div class="mt-6">
+          <p class="font-semibold mb-2">Pay via UPI:</p>
+          <div class="upi-copy flex items-center justify-between space-x-4">
+            <span id="upi-text" class="break-words">${upiID}</span>
+            <button onclick="copyUPI()" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">Copy</button>
+          </div>
         </div>
 
-        <div class="qr-code">
-          <h3>Scan the QR Code to Pay:</h3>
-          <img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiLink)}&size=250x250" alt="QR Code"/>
+        <div class="mt-8 text-center">
+          <p class="font-semibold text-gray-300 mb-4">Or scan this QR Code:</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiLink)}&size=250x250" alt="QR Code" class="mx-auto rounded-lg shadow-xl" />
         </div>
 
-        <div class="paid-container">
+        <div class="mt-8 text-center">
           <a href="verify.html?name=${encodeURIComponent(name)}&plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(price)}&orderid=${orderId}"
-             class="paid-btn">✅ Paid? Click here to move on</a>
+             class="inline-block bg-violet-600 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-violet-700 transition-colors transform hover:scale-105">✅ Paid? Click here to verify</a>
         </div>
       `;
     }
@@ -147,19 +170,11 @@
     function copyUPI() {
       const upi = document.getElementById("upi-text").textContent;
       navigator.clipboard.writeText(upi).then(() => {
-        alert("UPI ID copied to clipboard!");
+        showMessage('Copied!', 'UPI ID has been copied to your clipboard.');
       });
     }
 
     window.onload = showSummary;
   </script>
-</head>
-<body>
-  <div class="payment-container">
-    <h2>Complete Your Payment</h2>
-    <div class="summary-box">
-      <div id="summary"></div>
-    </div>
-  </div>
 </body>
 </html>
