@@ -4,107 +4,153 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact - TrustTune</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Inter font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* Custom CSS for gradient and animations */
     body {
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      background: linear-gradient(45deg, #ffa733, #1f1f1f); /* Brighter gradient */
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-color: #000000;
+      color: #e8eaed;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      padding: 30px 15px;
-      color: #fff;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .form-box-gradient-bg {
+      background: linear-gradient(45deg, #222, #111);
+    }
+
+    .logo-gradient {
+      background: -webkit-linear-gradient(45deg, #5a67d8, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .form-box {
-      background: rgba(26, 26, 26, 0.875); /* ~1/8 transparent feel */
-      padding: 40px;
+      position: relative;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
       border-radius: 16px;
       max-width: 450px;
       width: 100%;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(8px);
+      z-index: 10;
     }
-
-    h2 {
-      font-size: 28px;
-      color: #ff8c00;
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 6px;
-      margin-top: 16px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px 14px;
-      background: #222;
-      border: 1px solid #333;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 16px;
-      transition: border 0.3s, background 0.3s;
-    }
-
+    
     input:focus {
-      border-color: #ff8c00;
+      border-color: #5a67d8; /* Indigo accent */
+      box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.5);
       background-color: #2a2a2a;
       outline: none;
     }
 
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 24px;
-      background-color: #ff8c00;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    button:hover {
-      background-color: #e67600;
-      transform: scale(1.03);
-    }
-
-    .footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #aaa;
+    /* Message box styles */
+    .message-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.9);
+      border: 2px solid #5a67d8;
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 350px;
+      width: 90%;
+      z-index: 1000;
       text-align: center;
+      box-shadow: 0 5px 25px rgba(90, 103, 216, 0.5);
     }
-
-    @media (max-height: 600px) {
-      .footer {
-        margin-top: 15px;
-      }
+    .message-box h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #a855f7;
+      margin-bottom: 12px;
+    }
+    .message-box p {
+      font-size: 16px;
+      color: #e8eaed;
+      margin-bottom: 20px;
+    }
+    .message-box button {
+      background-color: #5a67d8;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .message-box button:hover {
+      background-color: #434fba;
     }
   </style>
 
+  <!-- HTML for the main form -->
+  <div class="form-box-gradient-bg p-1">
+    <div class="form-box p-8 md:p-10">
+      <h2 class="text-3xl font-bold logo-gradient text-center mb-6">Confirm Your Details</h2>
+      <form onsubmit="goToPayment(event)">
+        <label for="name" class="block font-semibold mb-2">Your Name:</label>
+        <input type="text" id="name" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none transition-colors mb-4" placeholder="Enter your name" required />
+
+        <label for="email" class="block font-semibold mb-2 mt-4">Your Email:</label>
+        <input type="email" id="email" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none transition-colors mb-4" placeholder="Enter your email" required />
+
+        <label for="phone" class="block font-semibold mb-2 mt-4">Your Phone Number:</label>
+        <input type="tel" id="phone" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none transition-colors mb-4" placeholder="Enter your phone number" required />
+
+        <label for="plan" class="block font-semibold mb-2 mt-4">Selected Plan:</label>
+        <input type="text" id="plan" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none transition-colors mb-4" readonly />
+
+        <label for="price" class="block font-semibold mb-2 mt-4">Price (₹):</label>
+        <input type="text" id="price" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none transition-colors mb-4" readonly />
+
+        <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 mt-6">Continue to Payment</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="mt-8 text-sm text-gray-500 text-center">
+    &copy; 2025 TrustTune Premium Subscriptions. All rights reserved.
+  </div>
+  
   <script>
+    // JavaScript for URL parameter parsing and form submission
+    function showMessage(title, message, callback) {
+      const existingMessageBox = document.getElementById('message-box-container');
+      if (existingMessageBox) existingMessageBox.remove();
+      
+      const messageBoxContainer = document.createElement('div');
+      messageBoxContainer.id = 'message-box-container';
+      messageBoxContainer.className = 'fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[999]';
+      messageBoxContainer.innerHTML = `
+        <div class="message-box">
+          <h3>${title}</h3>
+          <p>${message}</p>
+          <button id="close-message-box">OK</button>
+        </div>
+      `;
+      document.body.appendChild(messageBoxContainer);
+      
+      document.getElementById('close-message-box').addEventListener('click', () => {
+        messageBoxContainer.remove();
+        if (callback) callback();
+      });
+    }
+
     function getQueryParams() {
       const url = new URL(window.location.href);
       const plan = url.searchParams.get('plan') || '';
       const price = url.searchParams.get('price') || '';
-      document.getElementById('plan').value = plan;
-      document.getElementById('price').value = price;
+      document.getElementById('plan').value = decodeURIComponent(plan);
+      document.getElementById('price').value = decodeURIComponent(price);
     }
 
     function goToPayment(e) {
@@ -116,44 +162,20 @@
       const price = document.getElementById('price').value;
 
       if (!name || !email || !phone || !plan || !price) {
-        alert('Please fill all details.');
+        showMessage('Error', 'Please fill in all the required details.');
         return;
       }
 
       const params = new URLSearchParams({ name, email, phone, plan, price });
-      window.location.href = 'payment.html?' + params.toString();
+      // Simulate going to a payment page or processing the data
+      showMessage('Success', 'Your details have been submitted. You will now be redirected to the payment page.', () => {
+        // This is a placeholder for a real redirection.
+        // window.location.href = 'payment.html?' + params.toString();
+        console.log('Redirecting to payment with params:', params.toString());
+      });
     }
 
     window.onload = getQueryParams;
   </script>
-</head>
-<body>
-
-  <div class="form-box">
-    <h2>Confirm Your Details</h2>
-    <form onsubmit="goToPayment(event)">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" placeholder="Enter your name" required />
-
-      <label for="email">Your Email:</label>
-      <input type="email" id="email" placeholder="Enter your email" required />
-
-      <label for="phone">Your Phone Number:</label>
-      <input type="tel" id="phone" placeholder="Enter your phone number" required />
-
-      <label for="plan">Selected Plan:</label>
-      <input type="text" id="plan" readonly />
-
-      <label for="price">Price (₹):</label>
-      <input type="text" id="price" readonly />
-
-      <button type="submit">Continue to Payment</button>
-    </form>
-  </div>
-
-  <div class="footer">
-    &copy; 2025 TrustTune Premium Subscriptions. All rights reserved.
-  </div>
-
 </body>
-  </html>
+</html>
