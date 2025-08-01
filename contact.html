@@ -167,11 +167,9 @@
       }
 
       const params = new URLSearchParams({ name, email, phone, plan, price });
-      // Simulate going to a payment page or processing the data
-      showMessage('Success', 'Your details have been submitted. You will now be redirected to the payment page.', () => {
-        // This is a placeholder for a real redirection.
-        // window.location.href = 'payment.html?' + params.toString();
-        console.log('Redirecting to payment with params:', params.toString());
+      showMessage('Details Submitted', 'Details Finally submitted you will be redirected to payment gateway shorty', () => {
+        // Redirect to the payment page with the user's data
+        window.location.href = 'payment.html?' + params.toString();
       });
     }
 
