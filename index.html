@@ -6,12 +6,12 @@
   <title>TrustTune - Premium Subscriptions</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
   <style>
-    /* Global styles - Firebase Studio Colors on TrustTune Structure */
+    /* Global styles - New color scheme on original structure */
     body {
       margin: 0;
-      background-color: #000000; /* Pure black for uniform background */
-      color: #e8eaed; /* Light grey for primary text */
-      font-family: 'Roboto', 'Poppins', sans-serif; /* Blending fonts */
+      background-color: #000000;
+      color: #e8eaed;
+      font-family: 'Roboto', 'Poppins', sans-serif;
       line-height: 1.6;
       font-size: 16px;
       overflow-x: hidden;
@@ -27,10 +27,10 @@
 
     /* Navbar/Header Styling - Subtle initial background, Blurred on Scroll */
     .navbar {
-      background-color: rgba(0, 0, 0, 0.1); /* Very subtle initial dark background */
-      backdrop-filter: blur(2px); /* Slight blur always present for "cool" effect */
-      padding: 18px 0; /* Initial padding */
-      box-shadow: none; /* No shadow initially */
+      background-color: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(2px);
+      padding: 18px 0;
+      box-shadow: none;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -38,10 +38,10 @@
     }
     /* Navbar scrolled state */
     .navbar.scrolled {
-      background-color: rgba(0, 0, 0, 0.7); /* Deeper semi-transparent black when scrolled */
-      backdrop-filter: blur(8px); /* Stronger blur effect */
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Stronger shadow when scrolled */
-      padding: 5px 0; /* Reduced padding when scrolled to truly touch top */
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      padding: 5px 0;
     }
 
     .navbar .container {
@@ -51,7 +51,10 @@
       position: relative;
     }
     .logo {
-      color: #ff6d00; /* Firebase orange for the logo */
+      /* New logo gradient */
+      background: -webkit-linear-gradient(45deg, #5a67d8, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-family: 'Poppins', sans-serif;
       font-size: 30px;
       font-weight: 700;
@@ -91,7 +94,7 @@
       top: 100%;
       left: 0;
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.9); /* Slightly more opaque black for mobile menu */
+      background-color: rgba(0, 0, 0, 0.9);
       backdrop-filter: blur(5px);
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8);
       list-style: none;
@@ -125,8 +128,8 @@
       transition: background-color 0.2s ease, color 0.2s ease;
     }
     .mobile-nav a:hover {
-      background-color: rgba(255, 109, 0, 0.1);
-      color: #ff6d00;
+      background-color: rgba(90, 103, 216, 0.1); /* Hover color from new palette */
+      color: #5a67d8;
     }
 
     /* Hero Section (TrustTune Content) */
@@ -137,7 +140,7 @@
       color: #fff;
       position: relative;
       overflow: hidden;
-      margin-bottom: 100px; /* Increased gap below hero section */
+      margin-bottom: 100px;
     }
     .hero::before {
         content: '';
@@ -146,7 +149,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.85); /* Even darker overlay for more perceived transparency on navbar */
+        background-color: rgba(0, 0, 0, 0.85);
         backdrop-filter: blur(2px);
         z-index: 0;
     }
@@ -168,7 +171,7 @@
       font-weight: 300;
     }
     .btn {
-      background-color: #ea4335; /* Firebase Studio button color */
+      background-color: #5a67d8; /* New button color */
       color: #ffffff;
       padding: 18px 45px;
       border-radius: 6px;
@@ -179,32 +182,34 @@
       display: inline-block;
       cursor: pointer;
       border: none;
-      box-shadow: 0 6px 25px rgba(234, 67, 53, 0.5); /* Glow using button color */
+      box-shadow: 0 6px 25px rgba(90, 103, 216, 0.5); /* Glow using new button color */
     }
     .btn:hover {
-      background-color: #c93b2a;
+      background-color: #434fba;
       transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(234, 67, 53, 0.7);
+      box-shadow: 0 8px 30px rgba(90, 103, 216, 0.7);
     }
 
     /* Features Section (TrustTune Content) */
     .features {
       padding: 90px 0;
-      background-color: #000000; /* Pure black for features section */
+      background-color: #000000;
       text-align: center;
       position: relative;
     }
     .features h3 {
       font-size: 42px;
       margin-bottom: 60px;
-      color: #ff6d00; /* Orange accent for heading */
+      background: -webkit-linear-gradient(45deg, #5a67d8, #a855f7); /* New gradient accent */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-weight: 700;
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 0; /* NO GAP between feature boxes */
+      gap: 20px; /* Adjusted gap for better spacing */
       justify-items: center;
       align-items: start;
     }
@@ -212,33 +217,33 @@
     /* Feature Box Outer Container - For the rotating border effect */
     .feature-box {
       position: relative;
-      border-radius: 8px; /* Outer radius for the glow */
-      background: transparent; /* This will let the glow show through */
-      overflow: hidden; /* Crucial to clip the rotating gradient */
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Base shadow for the box */
+      border-radius: 8px;
+      background: transparent;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      padding: 1px; /* Small padding to allow inner box to be slightly smaller and reveal glow */
+      padding: 1px;
     }
 
     /* Pseudo-element for the MOVING GRADIENT BORDER */
     .feature-box::before {
       content: '';
       position: absolute;
-      top: -100%; /* Position the gradient far enough to move */
+      top: -100%;
       left: -100%;
-      width: 300%; /* Large enough to cover the box and rotate */
+      width: 300%;
       height: 300%;
-      /* Conic gradient for the rotating "light" effect */
+      /* Conic gradient for the rotating "light" effect, using new colors */
       background: conic-gradient(
         from 0deg at 50% 50%,
-        rgba(255, 109, 0, 0) 0%, /* Transparent */
-        rgba(255, 109, 0, 0.8) 5%, /* Peak glow */
-        rgba(255, 109, 0, 0) 15%, /* Fade out */
-        rgba(255, 109, 0, 0) 100%
+        rgba(90, 103, 216, 0) 0%,
+        rgba(90, 103, 216, 0.8) 5%,
+        rgba(90, 103, 216, 0) 15%,
+        rgba(90, 103, 216, 0) 100%
       );
-      animation: rotateGlow 8s linear infinite; /* EVEN SLOWER rotation for subtle movement */
-      z-index: 0; /* Behind the inner content */
-      border-radius: inherit; /* Inherit rounded corners */
+      animation: rotateGlow 8s linear infinite;
+      z-index: 0;
+      border-radius: inherit;
     }
 
     /* Keyframes for the rotating border glow */
@@ -249,43 +254,35 @@
 
     /* Inner Box to hold content and create the "border" cutout */
     .feature-box-inner {
-      background-color: rgba(255, 255, 255, 0.05); /* The actual card background color */
-      border-radius: 7px; /* Slightly smaller than outer to create the glowing border */
-      padding: 40px; /* Original padding for content */
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 7px;
+      padding: 40px;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative; /* Ensure content is on top */
-      z-index: 1; /* Above the ::before glow */
+      position: relative;
+      z-index: 1;
     }
-
-    /* Apply glow animation only when scrolled-in */
-    .features.scrolled-in .feature-box::before {
-        /* Animation applied directly to ::before, no need for extra class here */
-        display: block; /* Ensure it's visible if it was hidden initially */
-    }
+    
     .features.scrolled-in .feature-box {
-        /* Add a very subtle static glow when in view, to complement animation */
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 109, 0, 0.2);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 10px rgba(90, 103, 216, 0.2);
     }
-
     .feature-box:hover {
       transform: translateY(-8px);
-      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 109, 0, 0.6);
+      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(90, 103, 216, 0.6);
     }
     .feature-box:hover::before {
-        animation-play-state: paused; /* Pause the glow animation on hover (optional) */
-        /* Or change background for a static glow on hover */
+        animation-play-state: paused;
         background: conic-gradient(
           from 0deg at 50% 50%,
-          rgba(255, 109, 0, 0.8) 0%,
-          rgba(255, 109, 0, 0.8) 100%
-        ); /* Solid glow on hover */
+          rgba(90, 103, 216, 0.8) 0%,
+          rgba(90, 103, 216, 0.8) 100%
+        );
     }
 
     .feature-box h4 {
-      color: #ff6d00;
+      color: #a855f7; /* New heading color */
       margin-bottom: 20px;
       font-size: 24px;
       font-weight: 600;
@@ -298,7 +295,7 @@
 
     /* Footer Section */
     .footer {
-      background-color: #000000; /* Pure black for footer */
+      background-color: #000000;
       text-align: center;
       padding: 30px 0;
       font-size: 14px;
@@ -319,7 +316,7 @@
       }
       .features-grid {
         grid-template-columns: 1fr;
-        gap: 0; /* Keep gap at 0 on small screens */
+        gap: 20px;
       }
       .navbar .container {
         flex-direction: row;
@@ -347,7 +344,7 @@
         .features h3 {
             font-size: 28px;
         }
-        .feature-box-inner { /* Adjust inner padding for smaller screens */
+        .feature-box-inner {
             padding: 30px;
         }
     }
