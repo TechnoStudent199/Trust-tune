@@ -1,93 +1,146 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verify Payment - TrustTune</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Inter font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
+    /* Custom CSS for gradient and animations */
     body {
-      background: linear-gradient(45deg, #1d1d1d, #ff8c00);
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
-      margin: 0;
-      padding: 0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-color: #000000;
+      color: #e8eaed;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 2rem 1rem;
     }
+
+    .logo-gradient {
+      background: -webkit-linear-gradient(45deg, #5a67d8, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
     .verify-box {
-      background-color: rgba(26, 26, 26, 0.5);
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-      max-width: 400px;
-      width: 90%;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      max-width: 450px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
       text-align: center;
-    }h2 {
-  color: #ff8c00;
-  margin-bottom: 25px;
-}
+      z-index: 10;
+    }
+    
+    input:focus {
+      border-color: #5a67d8; /* Indigo accent */
+      box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.5);
+      background-color: #2a2a2a;
+      outline: none;
+    }
 
-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  background: #222;
-  color: #fff;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #ff8c00;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background-color: #e07800;
-}
-
-.note {
-  font-size: 13px;
-  color: #ccc;
-  margin-top: 10px;
-}
-
+    /* Message box styles */
+    .message-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.9);
+      border: 2px solid #5a67d8;
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 350px;
+      width: 90%;
+      z-index: 1000;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(90, 103, 216, 0.5);
+    }
+    .message-box h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #a855f7;
+      margin-bottom: 12px;
+    }
+    .message-box p {
+      font-size: 16px;
+      color: #e8eaed;
+      margin-bottom: 20px;
+    }
+    .message-box button {
+      background-color: #5a67d8;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .message-box button:hover {
+      background-color: #434fba;
+    }
   </style>
+</head>
+<body>
+  <div class="verify-box p-8 md:p-10">
+    <h2 class="text-3xl font-bold logo-gradient mb-6">Verify Payment</h2>
+    <input type="text" id="paymentId" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none transition-colors mb-4" placeholder="e.g. 2025UPI123456@PAYTM" />
+    <button onclick="verifyPayment()" class="w-full bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105">Verify Payment</button>
+    <p class="text-sm text-gray-500 mt-4">Enter your UPI Transaction ID (only UPPERCASE letters, no spaces, min 10 characters).</p>
+  </div>
+
   <script>
+    // JavaScript for payment verification and custom message pop-up
+    function showMessage(title, message, callback) {
+      const existingMessageBox = document.getElementById('message-box-container');
+      if (existingMessageBox) existingMessageBox.remove();
+      
+      const messageBoxContainer = document.createElement('div');
+      messageBoxContainer.id = 'message-box-container';
+      messageBoxContainer.className = 'fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[999]';
+      messageBoxContainer.innerHTML = `
+        <div class="message-box">
+          <h3>${title}</h3>
+          <p>${message}</p>
+          <button id="close-message-box">OK</button>
+        </div>
+      `;
+      document.body.appendChild(messageBoxContainer);
+      
+      document.getElementById('close-message-box').addEventListener('click', () => {
+        messageBoxContainer.remove();
+        if (callback) callback();
+      });
+    }
+
     function verifyPayment() {
       const pid = document.getElementById("paymentId").value.trim();
       const url = new URL(window.location.href);
       const name = url.searchParams.get("name") || "Customer";
       const plan = url.searchParams.get("plan") || "Plan";
       const price = url.searchParams.get("price") || "0";
-      const orderId = url.searchParams.get("orderid") || "TT000000";// UPPERCASE ONLY validation
-  const upiRegex = /^[A-Z0-9@._-]{10,}$/;
-  if (upiRegex.test(pid)) {
-    const thankYouUrl = `thankyou.html?name=${encodeURIComponent(name)}&plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(price)}&orderid=${orderId}`;
-    window.location.href = thankYouUrl;
-  } else {
-    alert("Invalid UPI Transaction ID. Use only UPPERCASE letters, numbers, and valid symbols. Minimum 10 characters.");
-  }
-}
-
+      const orderId = url.searchParams.get("orderid") || "TT000000";
+      
+      // UPPERCASE ONLY validation for UPI Transaction ID
+      const upiRegex = /^[A-Z0-9@._-]{10,}$/;
+      
+      if (upiRegex.test(pid)) {
+        const thankYouUrl = `thankyou.html?name=${encodeURIComponent(name)}&plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(price)}&orderid=${orderId}&paymentid=${encodeURIComponent(pid)}`;
+        // For demonstration, we'll show a message before redirecting.
+        showMessage("Verification Successful", "Your payment has been successfully verified. You will be redirected shortly.", () => {
+          window.location.href = thankYouUrl;
+        });
+      } else {
+        showMessage("Invalid ID", "Invalid UPI Transaction ID. Use only UPPERCASE letters, numbers, and valid symbols. Minimum 10 characters.");
+      }
+    }
   </script>
-</head>
-<body>
-  <div class="verify-box">
-    <h2>Enter UPI Transaction ID</h2>
-    <input type="text" id="paymentId" placeholder="e.g. 2025UPI123456@PAYTM"/>
-    <button onclick="verifyPayment()">Verify Payment</button>
-    <p class="note">Enter your UPI Transaction ID (only UPPERCASE letters, no spaces, min 10 characters).</p>
-  </div>
 </body>
 </html>
