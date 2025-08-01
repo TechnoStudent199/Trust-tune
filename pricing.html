@@ -2,194 +2,396 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TrustTune - Premium Plans</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Inter font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* Global styles */
+    /* Custom CSS for gradient and animations */
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #121212, #ff8c00); /* Dark gradient */
-      color: #fff;
+      font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      background-color: #000000;
+      color: #e8eaed;
     }
 
-    /* Navbar Styling */
-    header {
-      background-color: #121212; /* Firebase dark navbar */
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Heavy shadow */
+    .logo-gradient {
+      background: -webkit-linear-gradient(45deg, #5a67d8, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    header h1 {
-      margin: 0;
-      color: #ff8c00; /* Accent color */
+    
+    /* Keyframes for card animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    /* Container */
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 40px auto;
+    
+    .card-animate {
+      animation: fadeIn 0.5s ease-out forwards;
+      opacity: 0;
     }
-
-    /* Section Styling */
-    .section {
-      margin-bottom: 60px;
-    }
-
-    .section h2 {
-      color: #ff8c00; /* Accent color */
-      border-bottom: 2px solid #444;
-      padding-bottom: 5px;
-      margin-bottom: 20px;
-      font-size: 32px;
-    }
-
-    /* Cards Grid */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px; /* Increased gap between cards */
-      transition: transform 0.3s ease-out;
-    }
-
-    /* Card Styling */
-    .card {
-      background-color: rgba(26, 26, 26, 0.8); /* Slightly transparent dark card */
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Floating effect */
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-    }
-
-    .card h3 {
-      margin-top: 0;
-      font-size: 18px;
-      color: #ff8c00; /* Accent color */
-    }
-
-    .card p {
-      font-size: 14px;
-      margin: 10px 0;
-      color: #ccc;
-    }
-
-    .card a {
-      align-self: start;
-      text-decoration: none;
-      background-color: #ff8c00; /* Accent color */
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: 600;
-      margin-top: auto;
-      transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .card a:hover {
-      background-color: #e77c00; /* Hover effect */
-      transform: scale(1.05);
-    }
-
-    /* Footer */
-    .footer {
-      background-color: #121212;
-      text-align: center;
-      padding: 20px 0;
-      font-size: 14px;
-      color: #777;
-    }
-
-    /* IntersectionObserver Effect */
+    
+    /* IntersectionObserver effect for card scale */
     .card.in-view {
-      transform: scale(1.05); /* Apply zoom effect when card is in the viewport */
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Hover effect */
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     }
 
+    /* Custom scrollbar styling for a sleeker look */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #a855f7; /* Violet accent */
+        border-radius: 4px;
+        border: 1px solid #1a1a1a;
+    }
+    
   </style>
 </head>
-<body>
-  <header>
-    <h1>TrustTune Premium Plans</h1>
+<body class="bg-black text-gray-200">
+  <!-- Header Section -->
+  <header class="bg-gray-950/80 backdrop-blur-md sticky top-0 z-50 shadow-xl py-6 md:py-4">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-3xl font-extrabold logo-gradient">TrustTune Premium Plans</h1>
+    </div>
   </header>
 
-  <div class="container">
+  <main class="container mx-auto px-4 md:px-8 mt-12 md:mt-16">
     <!-- Video & Entertainment Subscriptions -->
-    <div class="section">
-      <h2>Video & Entertainment Subscriptions</h2>
-      <div class="cards">
-        <div class="card"><h3>Netflix: 1M, 1 Screen</h3><p>₹139 <br/>Original: ₹649</p><a href="contact.html?plan=Netflix&price=139">Buy Now</a></div>
-        <div class="card"><h3>YouTube Premium: 1M</h3><p>₹20 <br/>Original: ₹129</p><a href="contact.html?plan=YouTube%201M&price=20">Buy Now</a></div>
-        <div class="card"><h3>YouTube Premium: 6M</h3><p>₹650 <br/>Original: ₹699</p><a href="contact.html?plan=YouTube%206M&price=650">Buy Now</a></div>
-        <div class="card"><h3>YouTube Invite: 1Y</h3><p>₹950 <br/>Original: ₹1290</p><a href="contact.html?plan=YouTube%201Y&price=950">Buy Now</a></div>
-        <div class="card"><h3>YouTube Family: 1M</h3><p>₹45 <br/>Original: ₹189</p><a href="contact.html?plan=YouTube%20Family%201M&price=45">Buy Now</a></div>
-        <div class="card"><h3>Amazon Prime: 1M, 2 Screens</h3><p>₹49 <br/>Original: ₹199</p><a href="contact.html?plan=Prime%201M&price=49">Buy Now</a></div>
-        <div class="card"<h3>Amazon Prime 6m, 5 Screens</h3><p>369 <br/>Original: ₹599</p><a href="contact.html?plan=prime%206M&price=369">Buy Now</a></div>
-        <div class="card"><h3>Amazon Prime: 1yr, 4 Screens</h3><p>₹599 <br/>Original: ₹1200</p><a href="contact.html?plan=Prime%206M&price=599">Buy Now</a></div>
-        <div class="card"><h3>SonyLIV Premium: 1Y</h3><p>₹459 <br/>Original: ₹1499</p><a href="contact.html?plan=SonyLIV%201Y&price=459">Buy Now</a></div>
-        <div class="card"><h3>SonyLIV: 1M</h3><p>₹65 <br/>Original: ₹399</p><a href="contact.html?plan=SonyLIV%201M&price=65">Buy Now</a></div>
-        <div class="card"><h3>Jio+ Hotstar Premium: 1Y</h3><p>₹1299 <br/>Original: ₹1499</p><a href="contact.html?plan=Hotstar%20Premium%201Y&price=1299">Buy Now</a></div>
-        <div class="card"><h3>JioHotstar Super: 1M (No Ads)</h3><p>₹75 <br/>Original: ₹250</p><a href="contact.html?plan=Hotstar%20Super%201M&price=75">Buy Now</a></div>
-        <div class="card"><h3>Hoichoi: 1Y</h3><p>₹135 <br/>Original: ₹999</p><a href="contact.html?plan=Hoichoi%201Y&price=135">Buy Now</a></div>
-        <div class="card"><h3>Hoichoi: 3M</h3><p>₹95 <br/>Original: ₹599</p><a href="contact.html?plan=Hoichoi%203M&price=95">Buy Now</a></div>
-        <div class="card"><h3>Hoichoi: 1M</h3><p>₹40 <br/>Original: ₹180</p><a href="contact.html?plan=Hoichoi%201M&price=40">Buy Now</a></div>
-        <div class="card"><h3>Zee5: 1Y Full FHD</h3><p>₹439 <br/>Original: ₹899</p><a href="contact.html?plan=Zee5%201Y&price=439">Buy Now</a></div>
-        <div class="card"><h3>Crunchyroll: 1M</h3><p>₹50 <br/>Original: ₹79</p><a href="contact.html?plan=Crunchyroll%201M&price=50">Buy Now</a></div>
-        <div class="card"><h3>Crunchyroll: 6M</h3><p>₹300 <br/>Original: ₹500</p><a href="contact.html?plan=Crunchyroll%206M&price=300">Buy Now</a></div>
-        <div class="card"><h3>Crunchyroll: 1Y</h3><p>₹480 <br/>Original: ₹999</p><a href="contact.html?plan=Crunchyroll%201Y&price=480">Buy Now</a></div>
-        <div class="card"><h3>TimesPrime: 1Y</h3><p>₹189 <br/>Original: ₹1199</p><a href="contact.html?plan=TimesPrime%201Y&price=189">Buy Now</a></div>
+    <div class="mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold logo-gradient border-b-2 border-gray-800 pb-2 mb-8">Video & Entertainment</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        
+        <!-- Card 1 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Netflix: 1M, 1 Screen</h3>
+          <p class="text-gray-400 text-sm">Original: ₹649</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹139</p>
+          <a href="contact.html?plan=Netflix&price=139" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.1s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">YouTube Premium: 1M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹129</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹20</p>
+          <a href="contact.html?plan=YouTube%201M&price=20" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.2s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">YouTube Premium: 6M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹699</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹650</p>
+          <a href="contact.html?plan=YouTube%206M&price=650" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.3s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">YouTube Invite: 1Y</h3>
+          <p class="text-gray-400 text-sm">Original: ₹1290</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹950</p>
+          <a href="contact.html?plan=YouTube%201Y&price=950" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 5 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.4s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">YouTube Family: 1M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹189</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹45</p>
+          <a href="contact.html?plan=YouTube%20Family%201M&price=45" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 6 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.5s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Amazon Prime: 1M, 2 Screens</h3>
+          <p class="text-gray-400 text-sm">Original: ₹199</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹49</p>
+          <a href="contact.html?plan=Prime%201M&price=49" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 7 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.6s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Amazon Prime 6M, 5 Screens</h3>
+          <p class="text-gray-400 text-sm">Original: ₹599</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹369</p>
+          <a href="contact.html?plan=prime%206M&price=369" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 8 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.7s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Amazon Prime: 1yr, 4 Screens</h3>
+          <p class="text-gray-400 text-sm">Original: ₹1200</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹599</p>
+          <a href="contact.html?plan=Prime%206M&price=599" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 9 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.8s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">SonyLIV Premium: 1Y</h3>
+          <p class="text-gray-400 text-sm">Original: ₹1499</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹459</p>
+          <a href="contact.html?plan=SonyLIV%201Y&price=459" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 10 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.9s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">SonyLIV: 1M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹399</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹65</p>
+          <a href="contact.html?plan=SonyLIV%201M&price=65" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 11 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.0s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Jio+ Hotstar Premium: 1Y</h3>
+          <p class="text-gray-400 text-sm">Original: ₹1499</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹1299</p>
+          <a href="contact.html?plan=Hotstar%20Premium%201Y&price=1299" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 12 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.1s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">JioHotstar Super: 1M (No Ads)</h3>
+          <p class="text-gray-400 text-sm">Original: ₹250</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹75</p>
+          <a href="contact.html?plan=Hotstar%20Super%201M&price=75" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 13 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.2s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Hoichoi: 1Y</h3>
+          <p class="text-gray-400 text-sm">Original: ₹999</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹135</p>
+          <a href="contact.html?plan=Hoichoi%201Y&price=135" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 14 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.3s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Hoichoi: 3M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹599</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹95</p>
+          <a href="contact.html?plan=Hoichoi%203M&price=95" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 15 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.4s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Hoichoi: 1M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹180</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹40</p>
+          <a href="contact.html?plan=Hoichoi%201M&price=40" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 16 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.5s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Zee5: 1Y Full FHD</h3>
+          <p class="text-gray-400 text-sm">Original: ₹899</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹439</p>
+          <a href="contact.html?plan=Zee5%201Y&price=439" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 17 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.6s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Crunchyroll: 1M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹79</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹50</p>
+          <a href="contact.html?plan=Crunchyroll%201M&price=50" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 18 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.7s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Crunchyroll: 6M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹500</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹300</p>
+          <a href="contact.html?plan=Crunchyroll%206M&price=300" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 19 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.8s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Crunchyroll: 1Y</h3>
+          <p class="text-gray-400 text-sm">Original: ₹999</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹480</p>
+          <a href="contact.html?plan=Crunchyroll%201Y&price=480" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 20 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 1.9s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">TimesPrime: 1Y</h3>
+          <p class="text-gray-400 text-sm">Original: ₹1199</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹189</p>
+          <a href="contact.html?plan=TimesPrime%201Y&price=189" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
       </div>
     </div>
 
     <!-- Combo Offers Section -->
-    <div class="section">
-      <h2>Combo Offers</h2>
-      <div class="cards">
-        <div class="card"><h3>Jio Hotstar + Zee5 + SonyLIV</h3><p>₹149 / Month</p><a href="contact.html?plan=Jio+Hotstar+Zee5+SonyLIV&price=149">Buy Now</a></div>
-        <div class="card"><h3>Jio Hotstar + Zee5 + SonyLIV + Prime Video</h3><p>₹179 / Month</p><a href="contact.html?plan=Jio+Hotstar+Zee5+SonyLIV+PrimeVideo&price=179">Buy Now</a></div>
-        <div class="card"><h3>YouTube + Prime Video</h3><p>₹49 / Month</p><a href="contact.html?plan=YouTube+PrimeVideo&price=49">Buy Now</a></div>
-        <div class="card"><h3>SonyLIV + Prime Video + Netflix + Zee5</h3><p>₹339 / Month</p><a href="contact.html?plan=SonyLIV+PrimeVideo+Netflix+Zee5&price=339">Buy Now</a></div>
-        <div class="card"><h3>Zee5 + Prime Video + Netflix</h3><p>₹249 / Month</p><a href="contact.html?plan=Zee5+PrimeVideo+Netflix&price=249">Buy Now</a></div>
-        <div class="card"><h3>Prime Video + Disney Hotstar + Netflix</h3><p>₹275 / Month</p><a href="contact.html?plan=PrimeVideo+DisneyHotstar+Netflix&price=275">Buy Now</a></div>
-        <div class="card"><h3>Prime Video + Netflix</h3><p>₹169 / Month</p><a href="contact.html?plan=PrimeVideo+Netflix&price=169">Buy Now</a></div>
-        <div class="card"><h3>Prime Video + Spotify</h3><p>₹69 / Month</p><a href="contact.html?plan=PrimeVideo+Spotify&price=69">Buy Now</a></div>
+    <div class="mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold logo-gradient border-b-2 border-gray-800 pb-2 mb-8">Combo Offers</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        
+        <!-- Card 1 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Jio Hotstar + Zee5 + SonyLIV</h3>
+          <p class="text-gray-400 text-sm">Monthly Subscription</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹149</p>
+          <a href="contact.html?plan=Jio+Hotstar+Zee5+SonyLIV&price=149" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.1s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Jio Hotstar + Zee5 + SonyLIV + Prime Video</h3>
+          <p class="text-gray-400 text-sm">Monthly Subscription</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹179</p>
+          <a href="contact.html?plan=Jio+Hotstar+Zee5+SonyLIV+PrimeVideo&price=179" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.2s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">YouTube + Prime Video</h3>
+          <p class="text-gray-400 text-sm">Monthly Subscription</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹49</p>
+          <a href="contact.html?plan=YouTube+PrimeVideo&price=49" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.3s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">SonyLIV + Prime Video + Netflix + Zee5</h3>
+          <p class="text-gray-400 text-sm">Monthly Subscription</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹339</p>
+          <a href="contact.html?plan=SonyLIV+PrimeVideo+Netflix+Zee5&price=339" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 5 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.4s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Zee5 + Prime Video + Netflix</h3>
+          <p class="text-gray-400 text-sm">Monthly Subscription</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹249</p>
+          <a href="contact.html?plan=Zee5+PrimeVideo+Netflix&price=249" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 6 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.5s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Prime Video + Disney Hotstar + Netflix</h3>
+          <p class="text-gray-400 text-sm">Monthly Subscription</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹275</p>
+          <a href="contact.html?plan=PrimeVideo+DisneyHotstar+Netflix&price=275" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 7 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.6s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Prime Video + Netflix</h3>
+          <p class="text-gray-400 text-sm">Monthly Subscription</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹169</p>
+          <a href="contact.html?plan=PrimeVideo+Netflix&price=169" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 8 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.7s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Prime Video + Spotify</h3>
+          <p class="text-gray-400 text-sm">Monthly Subscription</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹69</p>
+          <a href="contact.html?plan=PrimeVideo+Spotify&price=69" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
       </div>
     </div>
 
     <!-- Creative & Productivity Subscriptions -->
-    <div class="section">
-      <h2>Creative & Productivity Subscriptions</h2>
-      <div class="cards">
-        <div class="card"><h3>Canva Pro: 1M</h3><p>₹45 <br/>Original: ₹499</p><a href="contact.html?plan=Canva%201M&price=45">Buy Now</a></div>
-        <div class="card"><h3>Canva Pro: 3M</h3><p>₹75 <br/>Original: ₹1500</p><a href="contact.html?plan=Canva%203M&price=75">Buy Now</a></div>
-        <div class="card"><h3>Canva Pro: 6M</h3><p>₹135 <br/>Original: ₹3000</p><a href="contact.html?plan=Canva%206M&price=135">Buy Now</a></div>
-        <div class="card"><h3>Adobe CC: 1M</h3><p>₹699 <br/>Original: ₹4230</p><a href="contact.html?plan=Adobe%201M&price=699">Buy Now</a></div>
+    <div class="mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold logo-gradient border-b-2 border-gray-800 pb-2 mb-8">Creative & Productivity</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        
+        <!-- Card 1 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Canva Pro: 1M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹499</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹45</p>
+          <a href="contact.html?plan=Canva%201M&price=45" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.1s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Canva Pro: 3M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹1500</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹75</p>
+          <a href="contact.html?plan=Canva%203M&price=75" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.2s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Canva Pro: 6M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹3000</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹135</p>
+          <a href="contact.html?plan=Canva%206M&price=135" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.3s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Adobe CC: 1M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹4230</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹699</p>
+          <a href="contact.html?plan=Adobe%201M&price=699" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
       </div>
     </div>
 
     <!-- Music & Audio Subscriptions -->
-    <div class="section">
-      <h2>Music & Audio Subscriptions</h2>
-      <div class="cards">
-        <div class="card"><h3>Spotify Premium: 2M</h3><p>₹39 <br/>Original: ₹238</p><a href="contact.html?plan=Spotify%202M&price=39">Buy Now</a></div>
-        <div class="card"><h3>Spotify Premium: 1Y Invite</h3><p>₹659 <br/>Original: ₹1189</p><a href="contact.html?plan=Spotify%201Y&price=659">Buy Now</a></div>
-        <div class="card"><h3>Apple Music: 1M</h3><p>₹45 <br/>Original: ₹99</p><a href="contact.html?plan=Apple%20Music%201M&price=45">Buy Now</a></div>
-        <div class="card"><h3>JioSaavn: 2M</h3><p>₹39 <br/>Original: ₹119</p><a href="contact.html?plan=JioSaavn%202M&price=39">Buy Now</a></div>
+    <div class="mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold logo-gradient border-b-2 border-gray-800 pb-2 mb-8">Music & Audio</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        
+        <!-- Card 1 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Spotify Premium: 2M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹238</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹39</p>
+          <a href="contact.html?plan=Spotify%202M&price=39" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.1s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Spotify Premium: 1Y Invite</h3>
+          <p class="text-gray-400 text-sm">Original: ₹1189</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹659</p>
+          <a href="contact.html?plan=Spotify%201Y&price=659" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.2s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Apple Music: 1M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹99</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹45</p>
+          <a href="contact.html?plan=Apple%20Music%201M&price=45" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="card bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform card-animate" style="animation-delay: 0.3s;">
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">JioSaavn: 2M</h3>
+          <p class="text-gray-400 text-sm">Original: ₹119</p>
+          <p class="text-3xl font-extrabold text-white mt-auto mb-4">₹39</p>
+          <a href="contact.html?plan=JioSaavn%202M&price=39" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors">Buy Now</a>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-950 py-6 text-center text-sm text-gray-500 border-t border-gray-800">
+    <p>&copy; 2025 TrustTune Premium Subscriptions. All rights reserved.</p>
+  </footer>
 
   <script>
-    // IntersectionObserver to apply the hover effect when the card is in the viewport
+    // JavaScript for card animations on scroll
     const cards = document.querySelectorAll('.card');
     const observerOptions = {
-      rootMargin: '0px 0px -50px 0px', // Triggering just before it hits the viewport
-      threshold: 0.5, // When 50% of the card is in view
+      rootMargin: '0px',
+      threshold: 0.3, /* When 30% of the card is in view */
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
@@ -207,4 +409,4 @@
     });
   </script>
 </body>
-                                                                                   </html>
+  </html>
