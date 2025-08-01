@@ -134,15 +134,14 @@
         <div class="message-box">
           <h3>${title}</h3>
           <p>${message}</p>
-          <button id="close-message-box">OK</button>
         </div>
       `;
       document.body.appendChild(messageBoxContainer);
       
-      document.getElementById('close-message-box').addEventListener('click', () => {
+      setTimeout(() => {
         messageBoxContainer.remove();
         if (callback) callback();
-      });
+      }, 2000); // 2-second delay
     }
 
     function getQueryParams() {
